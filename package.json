@@ -1,0 +1,25 @@
+{
+  "name": "live_chat_app",
+  "version": "1.0.0",
+  "description": "Perry's playground application for building the server for a live chat web app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "git+https://github.com/perrywarner/Live-Chat-App-Personal-Project.git",
+  "keywords": [
+    "Node",
+    "Express",
+    "React",
+    "TypeScript",
+    "Live",
+    "Chat",
+    "Yarn"
+  ],
+  "author": "Perry Warner",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/perrywarner/Live-Chat-App-Personal-Project/issues"
+  },
+  "homepage": "https://github.com/perrywarner/Live-Chat-App-Personal-Project#readme"
+}
