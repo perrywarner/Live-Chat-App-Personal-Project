@@ -25,13 +25,15 @@
   },
   "homepage": "https://github.com/perrywarner/Live-Chat-App-Personal-Project#readme",
   "devDependencies": {
-    "debug": "^4.1.1",
+    "create-react-app": "^2.1.8",
     "express-generator": "^4.16.0"
   },
   "dependencies": {
     "cookie-parser": "^1.4.4",
+    "debug": "^4.1.1",
     "express": "^4.16.4",
     "http-errors": "^1.7.2",
+    "morgan": "^1.9.1",
     "pug": "^2.0.3"
   }
 }

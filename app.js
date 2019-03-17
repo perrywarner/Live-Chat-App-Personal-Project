@@ -41,7 +41,11 @@ app.use(function(err, req, res, next) {
 module.exports = app;
 
 
+/* Below is the canonical hello world from https://nodejs.org/en/docs/guides/getting-started-guide/ using ES6 as of time of writing. 
+* The above is ES5 output from React-Backend, and would be more full featured at the cost of being an out of date JS versioning. 
+* TODO: slowly migrate the application skeleton above to be "Canonical ES6" */
 
+/*
 const http = require('http');
 
 const hostname = '127.0.0.1';
@@ -55,4 +59,4 @@ const server = http.createServer((req, res) => {
 
 server.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
-});
+}); */
