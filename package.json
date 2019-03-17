@@ -26,7 +26,8 @@
   "homepage": "https://github.com/perrywarner/Live-Chat-App-Personal-Project#readme",
   "devDependencies": {
     "create-react-app": "^2.1.8",
-    "express-generator": "^4.16.0"
+    "express-generator": "^4.16.0",
+    "react-scripts": "^2.1.8"
   },
   "dependencies": {
     "cookie-parser": "^1.4.4",
