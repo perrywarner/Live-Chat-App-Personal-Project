@@ -6,7 +6,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./bin/www"
+    "start": "PORT=3001 node ./bin/www"
   },
   "repository": "git+https://github.com/perrywarner/Live-Chat-App-Personal-Project.git",
   "keywords": [
@@ -27,7 +27,8 @@
   "devDependencies": {
     "create-react-app": "^2.1.8",
     "express-generator": "^4.16.0",
-    "react-scripts": "^2.1.8"
+    "react-scripts": "^2.1.8",
+    "typescript": "^3.3.3333"
   },
   "dependencies": {
     "cookie-parser": "^1.4.4",
