@@ -10,7 +10,7 @@ I be jammin mon'
 4. With first terminal session (this one will be our backend):
     1. Navigate to project root 
     2. Use Yarn to install our dependencies via the command **yarn install**
-    3. Start up our Node & Express server via the command **PORT=3001 node bin/www**
+    3. Start up our Node & Express server via the command **yarn start**
     4. Keep this terminal/window/session alive; just minimize or something for now
 5. With second terminal session (this one will be our frontend):
    1. Navigate to the Client side of the application at ~/client-side

@@ -6,7 +6,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./bin/www"
+    "start": "PORT=3001 node ./bin/www"
   },
   "repository": "git+https://github.com/perrywarner/Live-Chat-App-Personal-Project.git",
   "keywords": [
