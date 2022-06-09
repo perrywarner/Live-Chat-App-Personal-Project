@@ -1,42 +1,50 @@
 {
-  "name": "live_chat_app",
-  "version": "1.0.0",
-  "private": true,
-  "description": "Perry's playground application for building the server for a live chat web app",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "PORT=3001 node ./bin/www"
-  },
-  "repository": "git+https://github.com/perrywarner/Live-Chat-App-Personal-Project.git",
-  "keywords": [
-    "Node",
-    "Express",
-    "React",
-    "TypeScript",
-    "Live",
-    "Chat",
-    "Yarn"
-  ],
-  "author": "Perry Warner",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/perrywarner/Live-Chat-App-Personal-Project/issues"
-  },
-  "homepage": "https://github.com/perrywarner/Live-Chat-App-Personal-Project#readme",
-  "devDependencies": {
-    "create-react-app": "^2.1.8",
-    "express-generator": "^4.16.0",
-    "react-scripts": "^2.1.8",
-    "typescript": "^3.3.3333"
-  },
-  "dependencies": {
-    "cookie-parser": "^1.4.4",
-    "debug": "^4.1.1",
-    "express": "^4.16.4",
-    "http-errors": "^1.7.2",
-    "jade": "^1.11.0",
-    "morgan": "^1.9.1",
-    "pug": "^2.0.3"
-  }
+    "name": "live_chat_app",
+    "version": "1.0.0",
+    "private": true,
+    "description": "Perry's playground application for building the server for a live chat web app",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "PORT=3001 node ./bin/www",
+        "format": "yarn prettier --write .",
+        "format-check": "yarn prettier --check ."
+    },
+    "repository": "git+https://github.com/perrywarner/Live-Chat-App-Personal-Project.git",
+    "keywords": [
+        "Node",
+        "Express",
+        "React",
+        "TypeScript",
+        "Live",
+        "Chat",
+        "Yarn"
+    ],
+    "author": "Perry Warner",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/perrywarner/Live-Chat-App-Personal-Project/issues"
+    },
+    "homepage": "https://github.com/perrywarner/Live-Chat-App-Personal-Project#readme",
+    "devDependencies": {
+        "@types/cookie-parser": "^1.4.3",
+        "@types/express": "^4.17.13",
+        "@types/http-errors": "^1.8.2",
+        "@types/morgan": "^1.9.3",
+        "@types/node": "^12.20.55",
+        "create-react-app": "^2.1.8",
+        "express-generator": "^4.16.0",
+        "prettier": "2.6.2",
+        "react-scripts": "^2.1.8",
+        "typescript": "^3.3.3333"
+    },
+    "dependencies": {
+        "cookie-parser": "^1.4.4",
+        "debug": "^4.1.1",
+        "express": "^4.16.4",
+        "http-errors": "^1.7.2",
+        "jade": "^1.11.0",
+        "morgan": "^1.9.1",
+        "pug": "^2.0.3"
+    }
 }
