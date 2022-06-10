@@ -95,8 +95,12 @@ function onError(error) {
 
 function onListening() {
   let addr = server.address();
-  let bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+  if (addr !== null) {
+    let bind = typeof addr === 'string'
+      ? 'pipe ' + addr
+      : 'port ' + addr.port;
+    debug('Listening on ' + bind);
+  } else {
+    debug('Listening on ERROR: PORT UNKNOWN')
+  }
 }
