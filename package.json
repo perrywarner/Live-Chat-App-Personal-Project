@@ -6,6 +6,7 @@
     "main": "app.ts",
     "scripts": {
         "start": "ts-node ./bin/www.ts --input-type=module",
+        "start-ui": "cd client-side && yarn start",
         "test": "echo \"Error: no test specified\" && exit 1",
         "compile": "tsc",
         "format": "yarn prettier --write .",
