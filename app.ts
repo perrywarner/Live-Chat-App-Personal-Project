@@ -1,9 +1,11 @@
+// third party
 import createError from 'http-errors'
 import express, { Router } from 'express'
 import path from 'path'
 import cookieParser from 'cookie-parser'
 import logger from 'morgan'
 
+// creates instances of Express framework & Express's URL Router that will be referenced across the backend (singletons)
 export const app = express()
 export const router = Router()
 
@@ -17,25 +19,12 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
-const indexRoute = router.get('/', function (req, res, next) {
-    res.render('index', { title: 'Express' })
-})
-
-const usersRoute = router.get('/users', function (req, res, next) {
-    // res.send('respond with a resource');
-
-    res.json([
-        {
-            id: 1,
-            username: 'MyFirstUser',
-        },
-        {
-            id: 2,
-            username: 'coolguy32',
-        },
-    ])
-})
-
+// intra-app
+// !!!!!WARNING!!!!: these imports must be done AFTER "app" & "router" are initialized or else will get errors like:
+// /routes/indexRoute.ts:3: export const indexRoute = router.get('/', function (req, res, next) {   
+// TypeError: Cannot read properties of undefined (reading 'get')
+import { indexRoute } from './routes/default'
+import { usersRoute } from './routes/users'
 app.use('/', indexRoute)
 app.use('/users', usersRoute)
 
@@ -45,12 +34,16 @@ app.use(function (req, res, next) {
 })
 
 // error handler
-app.use(function (err, req, res) {
-    // set locals, only providing error in development
-    res.locals.message = err.message
-    res.locals.error = req.app.get('env') === 'development' ? err : {}
+// app.use(function (err, req, res) {
+//     /** !!!!!!! NOTE TO SELF: uncomment whole function and debug compile errors !!!!!!!
+//      * I commented out this whole "error handler middleware" fn because the following line of code "res.locals.message = err.message" caused
+//      * TS Error: Property 'locals' does not exist on type 'NextFunction'.ts(2339) <sidenote: param "res" is of type NextFunction>
+//      */
+//     // set locals, only providing error in development
+//     res.locals.message = err.message
+//     res.locals.error = req.app.get('env') === 'development' ? err : {}
     
-    // render the error page
-    res.status(err.status || 500)
-    res.render('error')
-})
+//     // render the error page
+//     res.status(err.status || 500)
+//     res.render('error')
+// })
