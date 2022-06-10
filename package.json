@@ -3,12 +3,16 @@
     "version": "1.0.0",
     "private": true,
     "description": "Perry's playground application for building the server for a live chat web app",
-    "main": "app.js",
+    "main": "app.ts",
     "scripts": {
+        "start": "ts-node ./bin/www.ts --input-type=module",
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "PORT=3001 node ./bin/www",
+        "compile": "tsc",
         "format": "yarn prettier --write .",
         "format-check": "yarn prettier --check ."
+    },
+    "engines": {
+        "node": ">=16.14.0"
     },
     "repository": "git+https://github.com/perrywarner/Live-Chat-App-Personal-Project.git",
     "keywords": [
@@ -36,7 +40,8 @@
         "express-generator": "^4.16.0",
         "prettier": "2.6.2",
         "react-scripts": "^2.1.8",
-        "typescript": "^3.3.3333"
+        "typescript": "4.7.2",
+        "ts-node": "10.8.1"
     },
     "dependencies": {
         "cookie-parser": "^1.4.4",

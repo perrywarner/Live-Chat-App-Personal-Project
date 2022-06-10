@@ -1,14 +1,11 @@
-let createError = require('http-errors')
-let express = require('express')
-let router = express.Router()
-let path = require('path')
-let cookieParser = require('cookie-parser')
-let logger = require('morgan')
+import createError from 'http-errors'
+import express, { Router } from 'express'
+import path from 'path'
+import cookieParser from 'cookie-parser'
+import logger from 'morgan'
 
-let indexRouter = require('./routes/index.ts')
-let usersRouter = require('./routes/users.ts')
-
-let app = express()
+export const app = express()
+export const router = Router()
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
@@ -20,8 +17,27 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.use('/', indexRouter)
-app.use('/users', usersRouter)
+const indexRoute = router.get('/', function (req, res, next) {
+    res.render('index', { title: 'Express' })
+})
+
+const usersRoute = router.get('/', function (req, res, next) {
+    // res.send('respond with a resource');
+
+    res.json([
+        {
+            id: 1,
+            username: 'MyFirstUser',
+        },
+        {
+            id: 2,
+            username: 'coolguy32',
+        },
+    ])
+})
+
+app.use('/', indexRoute)
+app.use('/users', usersRoute)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -33,13 +49,8 @@ app.use(function (err, req, res, next) {
     // set locals, only providing error in development
     res.locals.message = err.message
     res.locals.error = req.app.get('env') === 'development' ? err : {}
-
+    
     // render the error page
     res.status(err.status || 500)
     res.render('error')
 })
-
-module.exports = app
-
-// perry hack - source: https://github.com/microsoft/TypeScript/issues/47229#issuecomment-1112450734
-export {}

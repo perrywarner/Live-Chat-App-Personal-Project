@@ -4,22 +4,34 @@
  * Module dependencies.
  */
 
-var app = require('../app.ts');
-var debug = require('debug')('react-backend:server');
-var http = require('http');
+import { app } from '../app'
+import http from 'http';
+
+/** Note to future Perry about some CJS vs ESM imports:
+ * 
+ * The two lines of code "import { debug } from 'debug';" + "debug('react-backend:server')"
+ * Originally was a single line of code:
+ * a higher order CommonJS module import "var debug = require('debug')('react-backend:server');".
+ * 
+ * From reading https://stackoverflow.com/a/59872364 I learned that 
+ * first, the left side "require('debug')" gets resolved (as an import).
+ * Then the imported module "debug" gets immediately called - something like "debug('react-backend:server')"
+ */
+import { debug } from 'debug';
+debug('react-backend:server')
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+let port = normalizePort(process.env.PORT || '3001');
 app.set('port', port);
 
 /**
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+let server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -34,7 +46,7 @@ server.on('listening', onListening);
  */
 
 function normalizePort(val) {
-  var port = parseInt(val, 10);
+  let port = parseInt(val, 10);
 
   if (isNaN(port)) {
     // named pipe
@@ -58,7 +70,7 @@ function onError(error) {
     throw error;
   }
 
-  var bind = typeof port === 'string'
+  let bind = typeof port === 'string'
     ? 'Pipe ' + port
     : 'Port ' + port;
 
@@ -82,8 +94,8 @@ function onError(error) {
  */
 
 function onListening() {
-  var addr = server.address();
-  var bind = typeof addr === 'string'
+  let addr = server.address();
+  let bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
