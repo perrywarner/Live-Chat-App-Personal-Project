@@ -1,8 +1,15 @@
-# TAZDINGO
+# Live Chat App
 
-I be jammin mon'
+A live chat app personal project of Perry's to familiarize himself with Node & Express while solidifying his React & TS frontend skills.
 
-## Procedure to replicate
+## Architectural Design
+
+* Top-level: a Node & Express based REST API that wraps the client side app
+* Inner-level: inside the `/client-side` directory of this app is a Create React App that makes use of Material UI components
+* Language choice: TypeScript across the entire stack
+* Module system: ESModules across the entire stack (required a lot of config in the backend since the backend had to be ported from the older Nodejs standard of CommonJS)
+
+## Setup
 
 1. Git clone this repo
 2. Make sure you have Node.js, NPM, and Yarn installed on your local machine & accessible in any arbitrary location (e.g. needs to be in your $PATH)
