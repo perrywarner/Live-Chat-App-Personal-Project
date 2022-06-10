@@ -21,7 +21,7 @@ const indexRoute = router.get('/', function (req, res, next) {
     res.render('index', { title: 'Express' })
 })
 
-const usersRoute = router.get('/', function (req, res, next) {
+const usersRoute = router.get('/users', function (req, res, next) {
     // res.send('respond with a resource');
 
     res.json([
