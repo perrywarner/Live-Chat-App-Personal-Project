@@ -1,9 +1,12 @@
-// third party
 import createError from 'http-errors'
 import express, { Router } from 'express'
 import path from 'path'
 import cookieParser from 'cookie-parser'
 import logger from 'morgan'
+
+// create & share singleton instances of our app's internal logic engines
+import { UserService } from './services/user';
+export const User = new UserService();
 
 // creates instances of Express framework & Express's URL Router that will be referenced across the backend (singletons)
 export const app = express()
@@ -19,7 +22,6 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
-// intra-app
 // !!!!!WARNING!!!!: these imports must be done AFTER "app" & "router" are initialized or else will get errors like:
 // /routes/indexRoute.ts:3: export const indexRoute = router.get('/', function (req, res, next) {   
 // TypeError: Cannot read properties of undefined (reading 'get')
