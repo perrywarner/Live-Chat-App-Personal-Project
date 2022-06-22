@@ -6,10 +6,64 @@
 	},
 	"item": [
 		{
-			"name": "Get Users",
+			"name": "Get Messages",
 			"request": {
 				"method": "GET",
 				"header": [],
+				"url": {
+					"raw": "localhost:3001/messages",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"messages"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Message",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"data\": \"Mock Submitted Message\",\r\n    \"sentBy\": \"coolguy32\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3001/messages",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"messages"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add User",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"foo\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "localhost:3001/users",
 					"host": [
@@ -24,10 +78,20 @@
 			"response": []
 		},
 		{
-			"name": "Add User",
+			"name": "Get Users",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "localhost:3001/users",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"users"
+					]
+				}
 			},
 			"response": []
 		}
