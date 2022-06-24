@@ -24,6 +24,30 @@
 			"response": []
 		},
 		{
+			"name": "Get Messages Sent By User",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3001/messages?sentBy=coolguy32",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"messages"
+					],
+					"query": [
+						{
+							"key": "sentBy",
+							"value": "coolguy32"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Add Message",
 			"request": {
 				"method": "POST",

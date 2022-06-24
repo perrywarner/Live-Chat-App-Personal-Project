@@ -3,7 +3,16 @@ import { messageData } from '../mockData'
 import { MessageCreateRequest } from '../models'
 
 export const messagesRoute = router.get('/messages', (req, res) => {
-    res.json(messageData);
+    if (req.query.hasOwnProperty('sentBy')) {
+        // workaround for "Property 'sentBy' does not exist on type '{}'.ts(2339)"
+        const typecastParams = req.query as { sentBy: string };
+        const queryResult = Message.queryBy(typecastParams.sentBy);
+        if (queryResult !== undefined) {
+            res.json(queryResult)
+        } else res.json([]);
+    } else {
+        res.json(messageData);
+    }
 })
 
 // TODO increase strictness and error handling when submitted.sentBy doesn't match an entry in Users
