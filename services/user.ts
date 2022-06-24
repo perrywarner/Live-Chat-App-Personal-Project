@@ -1,5 +1,5 @@
 import { User, UserCreateRequest } from '../models'
-import { userData } from '../mockData'
+import { userData } from '../test/mockData'
 
 export class UserService {
     users: Map<User['name'], User>

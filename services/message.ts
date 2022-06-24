@@ -1,5 +1,5 @@
 import { Message, MessageCreateRequest } from '../models'
-import { messageData } from '../mockData'
+import { messageData } from '../test/mockData'
 
 export class MessageService {
     messages: Map<Message['createTime'], Message>

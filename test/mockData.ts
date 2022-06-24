@@ -1,4 +1,4 @@
-import { User, Message } from './models';
+import { User, Message } from '../models';
 
 export const messageData: Message[] = [
     {
