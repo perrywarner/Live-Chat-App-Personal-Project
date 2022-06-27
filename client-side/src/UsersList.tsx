@@ -10,16 +10,12 @@ export function UsersList() {
     useEffect(() => {
         getUsersAsync().then((userData) => {
             setUsers(userData)
-            console.log('Users after async call: ' + users)
         })
-        console.log('Users: ' + users)
     }, []) // effect hook that only fetches data when the component mounts, see https://www.robinwieruch.de/react-hooks-fetch-data/
 
     async function getUsersAsync() {
         const response = await fetch('/users')
-        console.log('Response body: ' + response.body)
         const userData: User[] = await response.json()
-        console.log(userData)
         return userData
     }
 
