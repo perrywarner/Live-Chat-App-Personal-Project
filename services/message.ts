@@ -13,20 +13,20 @@ export class MessageService {
         const newMessage: Message = {
             data: submitted.data,
             sentBy: submitted.sentBy,
-            createTime: Date.now()
+            createTime: Date.now(),
         }
         this.messages.set(newMessage.createTime, newMessage)
-        return newMessage;
+        return newMessage
     }
 
     // potential TODO: maybe add queryBy Message['data']
     queryBy(query: Message['sentBy'] | Message['createTime']) {
-        switch(typeof query) {
+        switch (typeof query) {
             case 'number':
-                return this.messages.get(query);
+                return this.messages.get(query)
             case 'string':
                 return Array.from(this.messages.values()).filter((message) => {
-                    return query === message.sentBy;
+                    return query === message.sentBy
                 })
         }
     }
@@ -48,8 +48,7 @@ export class MessageService {
     */
 }
 
-const keyedMessageData: readonly (readonly [number, Message])[] = messageData.map(
-    (message) => {
+const keyedMessageData: readonly (readonly [number, Message])[] =
+    messageData.map((message) => {
         return [message.createTime, message]
-    }
-)
+    })

@@ -16,9 +16,9 @@ export class UserService {
                 sentMessages: [],
             }
             this.users.set(submitted.name, newUser)
-            return newUser;
+            return newUser
         } else {
-            return false;
+            return false
         }
     }
 }

@@ -1,123 +1,103 @@
 {
-	"info": {
-		"_postman_id": "7e2f63a8-d15c-48e9-b11b-f74adbe35f73",
-		"name": "Live Chat App",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-	},
-	"item": [
-		{
-			"name": "Get Messages",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:3001/messages",
-					"host": [
-						"localhost"
-					],
-					"port": "3001",
-					"path": [
-						"messages"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get Messages Sent By User",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:3001/messages?sentBy=coolguy32",
-					"host": [
-						"localhost"
-					],
-					"port": "3001",
-					"path": [
-						"messages"
-					],
-					"query": [
-						{
-							"key": "sentBy",
-							"value": "coolguy32"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Add Message",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"data\": \"Mock Submitted Message\",\r\n    \"sentBy\": \"coolguy32\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:3001/messages",
-					"host": [
-						"localhost"
-					],
-					"port": "3001",
-					"path": [
-						"messages"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Add User",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"foo\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:3001/users",
-					"host": [
-						"localhost"
-					],
-					"port": "3001",
-					"path": [
-						"users"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get Users",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:3001/users",
-					"host": [
-						"localhost"
-					],
-					"port": "3001",
-					"path": [
-						"users"
-					]
-				}
-			},
-			"response": []
-		}
-	]
+    "info": {
+        "_postman_id": "7e2f63a8-d15c-48e9-b11b-f74adbe35f73",
+        "name": "Live Chat App",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Get Messages",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "localhost:3001/messages",
+                    "host": ["localhost"],
+                    "port": "3001",
+                    "path": ["messages"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Get Messages Sent By User",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "localhost:3001/messages?sentBy=coolguy32",
+                    "host": ["localhost"],
+                    "port": "3001",
+                    "path": ["messages"],
+                    "query": [
+                        {
+                            "key": "sentBy",
+                            "value": "coolguy32"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Add Message",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\r\n    \"data\": \"Mock Submitted Message\",\r\n    \"sentBy\": \"coolguy32\"\r\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "localhost:3001/messages",
+                    "host": ["localhost"],
+                    "port": "3001",
+                    "path": ["messages"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Add User",
+            "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\r\n    \"name\": \"foo\"\r\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "localhost:3001/users",
+                    "host": ["localhost"],
+                    "port": "3001",
+                    "path": ["users"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Get Users",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "localhost:3001/users",
+                    "host": ["localhost"],
+                    "port": "3001",
+                    "path": ["users"]
+                }
+            },
+            "response": []
+        }
+    ]
 }
