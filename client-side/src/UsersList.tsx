@@ -16,9 +16,9 @@ export function UsersList() {
     }, []) // effect hook that only fetches data when the component mounts, see https://www.robinwieruch.de/react-hooks-fetch-data/
 
     async function getUsersAsync() {
-        let response = await fetch('/users')
+        const response = await fetch('/users')
         console.log('Response body: ' + response.body)
-        let userData: User[] = await response.json()
+        const userData: User[] = await response.json()
         console.log(userData)
         return userData
     }
@@ -36,7 +36,7 @@ export function UsersList() {
             >
                 {users.map((user) => (
                     <div
-                        key={user.id}
+                        key={user.name}
                         style={{
                             display: 'flex',
                             flexDirection: 'row',
@@ -51,7 +51,7 @@ export function UsersList() {
                             <ul>
                                 {user.sentMessages.map((message) => {
                                     // TODO display message timestamp via message.createTime
-                                    return <li>{message.data}</li>
+                                    return <li key={message.createTime}>{message.data}</li>
                                 })}
                             </ul>
                         </div>
