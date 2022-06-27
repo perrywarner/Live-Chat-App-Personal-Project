@@ -1,12 +1,12 @@
 import React from 'react'
 import './App.css'
-import { UsersList } from '../UsersList'
+import { Login } from '../Login'
 
 export const App = () => {
     return (
         <div className="App">
             <header className="App-header">
-                <UsersList />
+                <Login />
             </header>
         </div>
     )

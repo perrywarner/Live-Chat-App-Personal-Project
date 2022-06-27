@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react'
 // intra-app
 import { User } from '../../../../models'
 
-export const UsersList = () => {
+export const Login = () => {
     const [users, setUsers] = useState<User[]>([])
 
     useEffect(() => {
