@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react'
 // intra-app
 import { User } from '../../models'
 
-export function UsersList() {
+export const UsersList = () => {
     const [users, setUsers] = useState<User[]>([])
 
     useEffect(() => {
@@ -21,7 +21,6 @@ export function UsersList() {
 
     return (
         <div>
-            {/* Users list, populated from backend! Following https://daveceddia.com/create-react-app-express-backend/ , progress/guide location found if you ctrl-f "Open up client/src"*/}
             <h1>Users</h1>
             <div
                 style={{
@@ -59,5 +58,3 @@ export function UsersList() {
 }
 
 /* crappy divider: <div style={{ width: '3rem', height: '1px', color: 'black', paddingBottom: '1rem'}} /> */
-
-export default UsersList

@@ -1,6 +1,6 @@
 import React from 'react'
 import './App.css'
-import UsersList from './UsersList'
+import { UsersList } from './UsersList'
 
 export const App = () => {
     return (
