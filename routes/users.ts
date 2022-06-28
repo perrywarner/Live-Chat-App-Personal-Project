@@ -1,9 +1,8 @@
 import { router, User } from '../app'
-import { userData } from '../test/mockData'
 import { UserCreateRequest } from '../models'
 
 export const usersRoute = router.get('/users', function (req, res) {
-    res.json(userData)
+    res.json(Array.from(User.users.values()))
 })
 
 export const createUser = router.put('/users', (req, res) => {
