@@ -28,7 +28,7 @@ export const Login: FC<LoginProps> = ({ onLogin }) => {
         setNewUserName(e.target.value);
     }
 
-    const handleCreate = async () => {
+    const handleCreate = () => {
         setTryPutUser(newUserName);
     }
 
