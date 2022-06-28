@@ -29,11 +29,6 @@ export const Login: FC<LoginProps> = ({ onLogin }) => {
     }
 
     const handleCreate = async () => {
-        // TODO send PUT User to /users
-        // * after PUT success, setUsers([...users, newUsername]). add <li> for new user that should be clickable in the same way the others are
-        // * after PUT failure, (TODO what do I want to do for error handling?)
-        // * bonus: loading icon / spinner while request in flight
-        console.log(`Plus icon (Create Icon) clicked. newUserName currently is ${newUserName}`);
         setTryPutUser(newUserName);
     }
 
