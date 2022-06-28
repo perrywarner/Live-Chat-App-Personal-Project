@@ -118,6 +118,33 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Send Message from New User (requires PUT \"Add User\" to be done before)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"data\": \"sending first message from new User \\\"foo\\\"\",\r\n    \"sentBy\": \"foo\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3001/messages",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"messages"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
