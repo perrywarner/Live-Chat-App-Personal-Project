@@ -1,31 +1,18 @@
-// third part
-import React, { useState, useEffect, FC, ChangeEventHandler, MouseEventHandler } from 'react'
+// third party
+import React, { useState, FC, ChangeEventHandler, MouseEventHandler, useEffect } from 'react'
 
 // intra-app
 import { User } from '../../../../models'
-
-// local
-import plusIcon from './icon-plus.svg';
+import { useUser } from '../../hooks/user';
+import { IconSubmit } from '../IconSubmit';
 
 interface LoginProps {
     onLogin: (selectedUser: User) => void;
 }
 
 export const Login: FC<LoginProps> = ({ onLogin }) => {
-    const [users, setUsers] = useState<User[]>()
+    const { users, setTryPutUser, isLoading  } = useUser();
     const [newUserName, setNewUserName] = useState<string>();
-
-    useEffect(() => {
-        getUsersAsync().then((userData) => {
-            setUsers(userData)
-        })
-    }, []) // effect hook that only fetches data when the component mounts, see https://www.robinwieruch.de/react-hooks-fetch-data/
-
-    async function getUsersAsync() {
-        const response = await fetch('/users')
-        const userData: User[] = await response.json()
-        return userData
-    }
 
     const handleListItemClick: MouseEventHandler<HTMLLIElement> = (e) => {
         const selectedUsername = e.currentTarget.textContent;
@@ -41,25 +28,30 @@ export const Login: FC<LoginProps> = ({ onLogin }) => {
         setNewUserName(e.target.value);
     }
 
-    const handleCreate = () => {
+    const handleCreate = async () => {
         // TODO send PUT User to /users
         // * after PUT success, setUsers([...users, newUsername]). add <li> for new user that should be clickable in the same way the others are
         // * after PUT failure, (TODO what do I want to do for error handling?)
         // * bonus: loading icon / spinner while request in flight
-        console.log(`Plus icon (Create Icon) clicked. newUserName currently is ${newUserName}`)
+        console.log(`Plus icon (Create Icon) clicked. newUserName currently is ${newUserName}`);
+        setTryPutUser(newUserName);
     }
+
+    useEffect(() => {
+        console.table(users);
+    }, [users])
 
     return (
         <div>
             <h2>Choose a user:</h2>
-            {users ? 
+            {!isLoading.get && users ? 
                 <ul>
                     {users.map((user) => (
                         <li onClick={handleListItemClick} key={user.name}>{user.name}</li>
                     ))}
                     <li>
                         <input onChange={handleInputChange}/> &nbsp;
-                        <img src={plusIcon} onClick={handleCreate} alt='Create User'/>
+                        <IconSubmit isLoading={isLoading.put} onClick={handleCreate} />
                     </li>
                 </ul>
             : <p>Loading...</p>}
