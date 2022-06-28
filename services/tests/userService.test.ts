@@ -12,7 +12,7 @@ describe('User Service', () => {
             name: 'Mock Submitted User',
         }
         const result = instance.create(mockSubmission)
-        expect(result).not.toBeFalsy();
+        expect(result).not.toBeFalsy()
     })
     it('should append User to the list of Users after successfully creating a User', () => {
         const mockSubmission: UserCreateRequest = {
