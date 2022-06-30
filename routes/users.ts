@@ -1,8 +1,9 @@
 import { router, User } from '../app'
 import { UserCreateRequest } from '../models'
 
+// TODO get by name
 export const usersRoute = router.get('/users', function (req, res) {
-    res.json(Array.from(User.users.values()))
+    res.json(User.getList())
 })
 
 export const createUser = router.put('/users', (req, res) => {
