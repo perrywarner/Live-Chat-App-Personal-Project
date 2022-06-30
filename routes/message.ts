@@ -1,6 +1,6 @@
 import { router, Message } from '../app'
 import { MessageCreateRequest } from '../models'
-import { addNewMessageToUserSentBy } from '../utils/runtimeSync';
+import { addNewMessageToUserSentBy } from '../utils/runtimeSync'
 
 export const messagesRoute = router.get('/messages', (req, res) => {
     if (req.query.hasOwnProperty('sentBy')) {
@@ -21,7 +21,7 @@ export const createMessage = router.post('/messages', (req, res) => {
         const submittedMessage: MessageCreateRequest = req.body
         const createResult = Message.create(submittedMessage)
         if (createResult) {
-            addNewMessageToUserSentBy(createResult);
+            addNewMessageToUserSentBy(createResult)
             return res.status(201).json(createResult)
         } else {
             return res.status(400)

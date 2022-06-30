@@ -8,7 +8,9 @@ export class UserService {
         this.users = new Map(keyedUserData)
     }
 
-    getList() {return Array.from(this.users.values())}
+    getList() {
+        return Array.from(this.users.values())
+    }
 
     create(submitted: UserCreateRequest) {
         const existing = this.users.get(submitted.name)
@@ -25,12 +27,17 @@ export class UserService {
     }
 
     addSentMessage(userName: User['name'], newMessage: Message) {
-        const prevState = this.users.get(userName);
+        const prevState = this.users.get(userName)
         if (!prevState) {
-            console.error(`tried to update sent messages of username ${userName} but no user with name ${userName} exists.`);
+            console.error(
+                `tried to update sent messages of username ${userName} but no user with name ${userName} exists.`
+            )
             // if this is a problem in the future, could maybe try to remedy the situation by doing something like creating a new user with the sent username
         } else {
-            const nextState = { ...prevState, sentMessages: [...prevState.sentMessages, newMessage]}
+            const nextState = {
+                ...prevState,
+                sentMessages: [...prevState.sentMessages, newMessage],
+            }
             this.users.set(userName, nextState)
         }
     }
