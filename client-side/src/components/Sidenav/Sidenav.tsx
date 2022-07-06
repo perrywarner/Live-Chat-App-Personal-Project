@@ -25,7 +25,7 @@ export const Sidenav: FC = () => {
                 <UserOption isSelected={selectedIcon === 'Home'} onClick={() => handleClick('User')}/>
             </div>
             <div className='sidenav-user'>
-                <p>User</p>
+                <strong>User Icon</strong>
             </div>
         </nav>
     )

@@ -1,13 +1,19 @@
 .sidenav {
+    height: 100%;
     background-color: forestgreen;
 
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
 }
 
 .sidenav-icons {
+    margin: .5rem;
+    height: 100%;
+
     display: flex;
     flex-direction: column;
+    justify-content: space-evenly;
 }
 
 .sidenav-icons-selectpage {
@@ -19,5 +25,6 @@
 }
 
 .sidenav-user {
+    margin: .5rem;
     border-top: 1px white;
 }
