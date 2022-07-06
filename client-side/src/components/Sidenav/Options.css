@@ -1,0 +1,8 @@
+.sidenav-option-selected {
+    border-left: 1px white;
+    color: white;
+}
+
+.sidenav-option {
+    color: black;
+}

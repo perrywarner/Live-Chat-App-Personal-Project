@@ -1,0 +1,23 @@
+.sidenav {
+    background-color: forestgreen;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.sidenav-icons {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidenav-icons-selectpage {
+    /* This is a third level Flex Child. 
+        I wonder if I need to specify this @ each level.
+        Maybe only on the .sidenav is enough? */
+    display: flex;
+    flex-direction: column;
+}
+
+.sidenav-user {
+    border-top: 1px white;
+}

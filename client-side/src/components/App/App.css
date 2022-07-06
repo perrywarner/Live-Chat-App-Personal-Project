@@ -1,5 +1,16 @@
 .App {
-    text-align: center;
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+}
+
+.Sidenav-container {
+    flex: 1;
+}
+
+.Main-container {
+    flex: 20;
 }
 
 .React-logo {
@@ -9,6 +20,7 @@
 }
 
 .App-header {
+    text-align: center;
     background-color: #282c34;
     min-height: 100vh;
     display: flex;
