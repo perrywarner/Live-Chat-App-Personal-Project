@@ -66,9 +66,9 @@ export const MessagePage: FC<MessagePageProps> = ({ loggedInAs }) => {
                         </div>
                     </div>
                 </div>
-                <div className='message-main-footer'>
-                    <input placeholder='Your messages...'/>
-                </div>
+                <footer className='message-main-footer'>
+                    <input className='message-main-input' placeholder='Your messages...'/>
+                </footer>
             </div>
         </div>
     )

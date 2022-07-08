@@ -1,12 +1,13 @@
 .message-page-root {
+    height: 100%;
     display: flex;
-    margin: 1rem;
 }
 
 .message-list {
     flex: 1;
     display: flex;
     flex-direction: column;
+    padding: .5rem 1rem .5rem 1rem;
 }
 
 .message-list-header {
@@ -22,6 +23,7 @@
     flex: 3;
     display: flex;
     flex-direction: column;
+    padding: .5rem;
 }
 
 .message-main-header {
@@ -32,15 +34,31 @@
     flex: 10;
     display: flex;
     flex-direction: column;
+    background-color: whitesmoke;
 }
 
 .message-main-footer {
     flex: 1;
+    
+    padding: .5rem;
+
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
 }
 
 .message-main-item {
     width: 100%;
     display: flex;
+}
+
+.message-main-input {
+    width: 90%;
+    height: 70%;
+    background-color: whitesmoke;
+    border-radius: 2rem;
+    border: 0px;
 }
 
 .message-from-others {
