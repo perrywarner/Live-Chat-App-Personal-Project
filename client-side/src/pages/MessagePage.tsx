@@ -3,9 +3,19 @@ import React, { FC } from 'react'
 
 // intra-app
 import { Message, User } from '../../../models';
+import { MessageMainItem } from '../components/MessageMainItem/MessageMainItem'; // note: not picking up the index.ts in that directory for some reason
+import { MessageListItem } from '../components/MessageListItem';
 
 // local
 import './MessagePage.css';
+
+const fakeMessages: Message[] = [
+    { data: 'Have a great working week!', sentBy: 'Putri Tanjak', createTime: 0 },
+    { data: 'This new landing page, What do you think?', sentBy: 'Ahmed Medi', createTime: 1 },
+    { data: '(img)', sentBy: 'Ahmed Medi', createTime: 2 },
+    { data: '(Audio)', sentBy: 'Milie Nose', createTime: 3 },
+    { data: 'Ok maszeehh!', sentBy: 'FooBar', createTime: 4 },
+];
 
 interface MessagePageProps {
     loggedInAs: User;
@@ -20,12 +30,9 @@ export const MessagePage: FC<MessagePageProps> = ({ loggedInAs }) => {
                     <p>(edit icon)</p>
                 </div>
                 <input placeholder='Search...'/>
-                {fakeData.map((message) => {
+                {fakeMessages.map((message) => {
                     return (
-                        <div className='message-list-item' key={message.createTime}>
-                            <p>{message.sentBy}</p>
-                            <p>{message.data}</p>
-                        </div>
+                        <MessageListItem message={message} key={message.createTime}/>
                     )
                 })}
                 {/* mockup shows "pinned" vs "all" messages, skipping "pinned" for now */}
@@ -35,36 +42,9 @@ export const MessagePage: FC<MessagePageProps> = ({ loggedInAs }) => {
                     <h2>Design Team</h2>
                 </div>
                 <div className='message-main-body'>
-                    <div className='message-main-item'>
-                        <div className='message-from-others'>
-                            <strong>Putri Tanjak</strong>
-                            <p>Have a great working week!</p>
-                        </div>
-                    </div>
-                    <div className='message-main-item'>
-                        <div className='message-from-others'>
-                            <strong>Ahmed Medi</strong>
-                            <p>This new landing page, What do you think?</p>
-                        </div>
-                    </div>
-                    <div className='message-main-item'>
-                        <div className='message-from-others'>
-                            <strong>Ahmed Medi</strong>
-                            <p>(img)</p>
-                        </div>
-                    </div>
-                    <div className='message-main-item'>
-                        <div className='message-from-others'>
-                            <strong>Milie Nose</strong>
-                            <p>(Audio)</p>
-                        </div>
-                    </div>
-                    <div className='message-main-item'>
-                        <div className='message-from-self'>
-                            <strong>You (logged in as {loggedInAs.name})</strong>
-                            <p>Ok maszeehh!</p>
-                        </div>
-                    </div>
+                    {fakeMessages.map((message) => {
+                        return <MessageMainItem message={message} loggedInAs={loggedInAs} key={message.createTime} />
+                    })}
                 </div>
                 <footer className='message-main-footer'>
                     <input className='message-main-input' placeholder='Your messages...'/>
@@ -73,17 +53,3 @@ export const MessagePage: FC<MessagePageProps> = ({ loggedInAs }) => {
         </div>
     )
 }
-
-const fakeData: Message[] = [{
-    data: 'foo',
-    sentBy: 'test1',
-    createTime: 0
-}, {
-    data: 'bar',
-    sentBy: 'test2',
-    createTime: 1
-}, {
-    data: 'baz',
-    sentBy: 'test3',
-    createTime: 2
-}]
