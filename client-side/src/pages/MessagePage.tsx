@@ -1,5 +1,6 @@
 // third party
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
+import List from '@mui/material/List';
 
 // intra-app
 import { Message, User } from '../../../models';
@@ -22,6 +23,12 @@ interface MessagePageProps {
 }
 
 export const MessagePage: FC<MessagePageProps> = ({ loggedInAs }) => {
+    const [selectedListIndex, setSelectedListIndex] = useState<number>();
+
+    const handleListItemClick = (nextIndex: number) => {
+        setSelectedListIndex(nextIndex)
+    }
+
     return (
         <div className='message-page-root'>
             <div className='message-list'>
@@ -30,11 +37,13 @@ export const MessagePage: FC<MessagePageProps> = ({ loggedInAs }) => {
                     <p>(edit icon)</p>
                 </div>
                 <input placeholder='Search...'/>
-                {fakeMessages.map((message) => {
-                    return (
-                        <MessageListItem message={message} key={message.createTime}/>
-                    )
-                })}
+                <List>
+                    {fakeMessages.map((message, index) => {
+                        return (
+                            <MessageListItem message={message} selected={selectedListIndex === index} onClick={() => handleListItemClick(index)} key={index}/>
+                        )
+                    })}
+                </List>
                 {/* mockup shows "pinned" vs "all" messages, skipping "pinned" for now */}
             </div>
             <div className='message-main'>

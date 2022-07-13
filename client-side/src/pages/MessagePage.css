@@ -14,11 +14,6 @@
     display: flex;
 }
 
-.message-list-item {
-    display: flex;
-    flex-direction: column;
-}
-
 .message-main {
     flex: 3;
     display: flex;
