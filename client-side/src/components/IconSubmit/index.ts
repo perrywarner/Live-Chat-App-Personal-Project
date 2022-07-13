@@ -1,1 +1,1 @@
-export * from './SubmitIcon';
+export * from './SubmitIcon'

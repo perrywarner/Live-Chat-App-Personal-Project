@@ -8,7 +8,7 @@
 }
 
 .sidenav-icons {
-    margin: .5rem;
+    margin: 0.5rem;
     height: 100%;
 
     display: flex;
@@ -25,6 +25,6 @@
 }
 
 .sidenav-user {
-    margin: .5rem;
+    margin: 0.5rem;
     border-top: 1px white;
 }
