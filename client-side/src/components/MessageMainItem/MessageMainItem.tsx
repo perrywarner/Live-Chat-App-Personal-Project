@@ -1,5 +1,7 @@
 // third party
 import React, { FC } from 'react'
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 
 // intra-app
 import { Message, User } from '../../../../models';
@@ -13,11 +15,13 @@ export const MessageMainItem: FC<MessageMainItemProps> = ({ message, loggedInAs 
     const sentBySelf = message.sentBy === loggedInAs.name;
 
     return (
-        <div className='message-main-item'>
-            <div className={sentBySelf ? 'message-from-self' : 'message-from-others'}>
-                <strong>{sentBySelf ? `You (logged in as ${loggedInAs.name})`: message.sentBy}</strong>
-                <p>{message.data}</p>
-            </div>
-        </div>
+        <Grid item xs={8} sx={{ alignSelf: sentBySelf ? 'flex-end' : 'flex-start' }}>
+            <Typography variant='subtitle1'>
+                {sentBySelf ? `You (logged in as ${loggedInAs.name})`: message.sentBy}
+            </Typography>
+            <Typography variant='body1'>
+                {message.data}    
+            </Typography>
+        </Grid>
     )
 }
