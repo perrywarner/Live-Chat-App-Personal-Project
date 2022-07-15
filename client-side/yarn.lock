@@ -4818,6 +4818,7 @@ __metadata:
     react-scripts: 5.0.1
     redux: ^4.2.0
     typescript: ^4.7.4
+    web-vitals: ^3.0.0-beta.2
   languageName: unknown
   linkType: soft
 
@@ -13064,6 +13065,13 @@ __metadata:
   dependencies:
     minimalistic-assert: ^1.0.0
   checksum: 2abc306c96930b757972a1c4650eb6b25b5d99f24088714957f88629e137db569368c5de0e57986c89ea70db2f1df9bba11a87cb6d0c8694b6f53a0159fab3bf
+  languageName: node
+  linkType: hard
+
+"web-vitals@npm:^3.0.0-beta.2":
+  version: 3.0.0-beta.2
+  resolution: "web-vitals@npm:3.0.0-beta.2"
+  checksum: a6ee5dd5be186e6ef95914e698fd41f9ea3ebd41669cec95dc1a748f5b7df1d6b4d1bd668f102c370cb6977bd760d857b3cbf3e4d48b72b38ca8f64b5c75262c
   languageName: node
   linkType: hard
 

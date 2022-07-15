@@ -11,7 +11,7 @@ import { AppBar } from '../AppBar'
 
 // intra app - redux example (TODO get rid of this)
 import ReduxDemo from '../../redux-CRA-example/App'
-import store from '../../redux-CRA-example/app/store'
+import { store } from '../../redux-CRA-example/app/store'
 
 // local
 import './App.css'
