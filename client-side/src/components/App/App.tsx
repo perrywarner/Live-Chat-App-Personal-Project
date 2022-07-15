@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 import { User } from '../../../../models'
 import { MessagePage } from '../../pages/MessagePage'
 import { Login } from '../Login'
-import { Sidenav } from '../AppBar'
+import { AppBar } from '../AppBar'
 
 // local
 import './App.css'
@@ -25,7 +25,7 @@ export const App = () => {
 
     return (
         <>
-            <Sidenav
+            <AppBar
                 loggedIn={Boolean(user)}
                 onLoginClick={handleAppbarLoginClick}
             />
