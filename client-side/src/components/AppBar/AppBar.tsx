@@ -23,18 +23,18 @@ interface SidenavProps {
 }
 
 export const Sidenav: FC<SidenavProps> = ({ loggedIn, onLoginClick }) => {
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
+    const [menuAnchor, setMenuAnchor] = React.useState<null | HTMLElement>(null)
 
     const handleLoginClick = () => {
         onLoginClick()
     }
 
-    const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorEl(event.currentTarget)
+    const handleUserIconClick = (event: React.MouseEvent<HTMLElement>) => {
+        setMenuAnchor(event.currentTarget)
     }
 
-    const handleClose = () => {
-        setAnchorEl(null)
+    const handleMenuClose = () => {
+        setMenuAnchor(null)
     }
 
     return (
@@ -77,14 +77,14 @@ export const Sidenav: FC<SidenavProps> = ({ loggedIn, onLoginClick }) => {
                             aria-label="account of current user"
                             aria-controls="menu-appbar"
                             aria-haspopup="true"
-                            onClick={handleMenu}
+                            onClick={handleUserIconClick}
                             color="inherit"
                         >
                             <AccountCircle />
                         </IconButton>
                         <Menu
                             id="menu-appbar"
-                            anchorEl={anchorEl}
+                            anchorEl={menuAnchor}
                             anchorOrigin={{
                                 vertical: 'top',
                                 horizontal: 'right',
@@ -94,11 +94,13 @@ export const Sidenav: FC<SidenavProps> = ({ loggedIn, onLoginClick }) => {
                                 vertical: 'top',
                                 horizontal: 'right',
                             }}
-                            open={Boolean(anchorEl)}
-                            onClose={handleClose}
+                            open={Boolean(menuAnchor)}
+                            onClose={handleMenuClose}
                         >
-                            <MenuItem onClick={handleClose}>Profile</MenuItem>
-                            <MenuItem onClick={handleClose}>
+                            <MenuItem onClick={handleMenuClose}>
+                                Profile
+                            </MenuItem>
+                            <MenuItem onClick={handleMenuClose}>
                                 My account
                             </MenuItem>
                         </Menu>
