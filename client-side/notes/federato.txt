@@ -1,0 +1,6 @@
+federato: reactjs & nodejs w/ typescript
+underwriting platform for insurance carriers
+originated out of stanford uni (young team)
+backed by (x capital) & salesforce
+15MM series A, 8 year runway. working with 2 of the top ten ins companies globally
+unlimited PTO, 401k match, 5000$ learning stipend
