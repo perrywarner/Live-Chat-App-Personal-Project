@@ -1,5 +1,7 @@
 // third party
 import React, { FC } from 'react'
+
+// third party - mui
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
 import Button from '@mui/material/Button'
@@ -7,8 +9,13 @@ import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import MenuItem from '@mui/material/MenuItem'
 import Menu from '@mui/material/Menu'
+import Badge from '@mui/material/Badge'
+
+// third party - mui icons
 import MenuIcon from '@mui/icons-material/Menu'
 import AccountCircle from '@mui/icons-material/AccountCircle'
+import MailIcon from '@mui/icons-material/Mail'
+import NotificationsIcon from '@mui/icons-material/Notifications'
 
 interface SidenavProps {
     loggedIn: boolean
@@ -45,6 +52,24 @@ export const Sidenav: FC<SidenavProps> = ({ loggedIn, onLoginClick }) => {
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                     LiveChat
                 </Typography>
+                <IconButton
+                    size="large"
+                    aria-label="show 4 new mails"
+                    color="inherit"
+                >
+                    <Badge badgeContent={4} color="error">
+                        <MailIcon />
+                    </Badge>
+                </IconButton>
+                <IconButton
+                    size="large"
+                    aria-label="show 17 new notifications"
+                    color="inherit"
+                >
+                    <Badge badgeContent={17} color="error">
+                        <NotificationsIcon />
+                    </Badge>
+                </IconButton>
                 {loggedIn ? (
                     <>
                         <IconButton
