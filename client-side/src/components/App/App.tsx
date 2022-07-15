@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 import { User } from '../../../../models'
 import { MessagePage } from '../../pages/MessagePage'
 import { Login } from '../Login'
-import { Sidenav } from '../Sidenav'
+import { Sidenav } from '../AppBar'
 
 // local
 import './App.css'
@@ -17,11 +17,18 @@ export const App = () => {
         setUser(selectedUser)
     }
 
+    const handleAppbarLoginClick = () => {
+        console.log(
+            'TODO: route to Login Page (when get around to extracting to that)'
+        )
+    }
+
     return (
-        <div className="App">
-            <div className="Sidenav-container">
-                <Sidenav />
-            </div>
+        <>
+            <Sidenav
+                loggedIn={Boolean(user)}
+                onLoginClick={handleAppbarLoginClick}
+            />
             <div className="Main-container">
                 {!user ? (
                     <header className="App-header">
@@ -31,6 +38,6 @@ export const App = () => {
                     <MessagePage loggedInAs={user} />
                 )}
             </div>
-        </div>
+        </>
     )
 }
