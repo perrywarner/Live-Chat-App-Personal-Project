@@ -2,7 +2,7 @@
 import React, { FC } from 'react'
 
 // third party - mui
-import AppBar from '@mui/material/AppBar'
+import MuiAppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
 import Button from '@mui/material/Button'
 import IconButton from '@mui/material/IconButton'
@@ -17,12 +17,12 @@ import AccountCircle from '@mui/icons-material/AccountCircle'
 import MailIcon from '@mui/icons-material/Mail'
 import NotificationsIcon from '@mui/icons-material/Notifications'
 
-interface SidenavProps {
+interface AppBarProps {
     loggedIn: boolean
     onLoginClick: () => void
 }
 
-export const Sidenav: FC<SidenavProps> = ({ loggedIn, onLoginClick }) => {
+export const Sidenav: FC<AppBarProps> = ({ loggedIn, onLoginClick }) => {
     const [menuAnchor, setMenuAnchor] = React.useState<null | HTMLElement>(null)
 
     const handleLoginClick = () => {
@@ -38,7 +38,7 @@ export const Sidenav: FC<SidenavProps> = ({ loggedIn, onLoginClick }) => {
     }
 
     return (
-        <AppBar position="static">
+        <MuiAppBar position="static">
             <Toolbar>
                 <IconButton
                     size="large"
@@ -111,6 +111,6 @@ export const Sidenav: FC<SidenavProps> = ({ loggedIn, onLoginClick }) => {
                     </Button>
                 )}
             </Toolbar>
-        </AppBar>
+        </MuiAppBar>
     )
 }
