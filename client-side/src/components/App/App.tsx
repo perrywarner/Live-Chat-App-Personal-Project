@@ -6,12 +6,13 @@ import { Provider } from 'react-redux'
 // intra app
 import { User } from '../../../../models'
 import { MessagePage } from '../../pages/MessagePage'
+import { store } from '../../state/store'
 import { Login } from '../Login'
 import { AppBar } from '../AppBar'
 
 // intra app - redux example (TODO get rid of this)
 import ReduxDemo from '../../redux-CRA-example/App'
-import { store } from '../../redux-CRA-example/app/store'
+import { demoStore } from '../../redux-CRA-example/app/store'
 
 // local
 import './App.css'
@@ -36,13 +37,19 @@ export const App = () => {
 
     if (showRedux) {
         return (
-            <Provider store={store}>
-                <ReduxDemo />
-            </Provider>
+            <p style={{ textAlign: 'center' }}>
+                Uncomment line 41-43 of App.tsx to check out demo. <br /> I
+                Would have this stuff uncommented but Redux devtools, etc. are
+                bugged due to multiple stores and providers in the app. <br />{' '}
+                TODO need to consolidate the stores.
+            </p>
+            // <Provider store={demoStore}>
+            //     <ReduxDemo />
+            // </Provider>
         )
     } else {
         return (
-            <>
+            <Provider store={store}>
                 <AppBar
                     loggedIn={Boolean(user)}
                     onLoginClick={handleAppbarLoginClick}
@@ -62,7 +69,7 @@ export const App = () => {
                         <MessagePage loggedInAs={user} />
                     )}
                 </div>
-            </>
+            </Provider>
         )
     }
 }

@@ -1,5 +1,6 @@
 // third party
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useEffect } from 'react'
+import { Box, Typography } from '@mui/material'
 import List from '@mui/material/List'
 import Paper from '@mui/material/Paper'
 import Grid from '@mui/material/Grid'
@@ -14,10 +15,15 @@ import SendIcon from '@mui/icons-material/Send'
 import { Message, User } from '../../../models'
 import { MessageMainItem } from '../components/MessageMainItem/MessageMainItem' // note: not picking up the index.ts in that directory for some reason
 import { MessageListItem } from '../components/MessageListItem'
+import { useAppDispatch, useAppSelector } from '../state/hooks'
 
 // local
 import './MessagePage.css'
-import { Box, Typography } from '@mui/material'
+import {
+    selectMessageState,
+    fetchTotalMessages,
+    changeMessageThread,
+} from './messageSlice'
 
 const fakeMessages: Message[] = [
     {
@@ -40,6 +46,25 @@ interface MessagePageProps {
 }
 
 export const MessagePage: FC<MessagePageProps> = ({ loggedInAs }) => {
+    // const { total, filtered, filteredBy, requestStatus } =
+    //     useAppSelector(selectMessageState)
+    const state = useAppSelector(selectMessageState)
+    const dispatch = useAppDispatch()
+
+    console.info('Total Messages: ', state.total)
+
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // BUGGED HERE
+    // * data fetch is ok: message data fetch on page load is executing and resolving w/ HTTP 200 OK & data
+    // * message reducer needs debugging: unfortunately it looks like messageSlice.extraReducers's Case: "rejected" is always getting called even when the request is supposed to fulfill..
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    useEffect(() => {
+        console.log('dispatching fetchTotalMessages')
+        dispatch(fetchTotalMessages())
+    }, [])
+
     const [selectedListIndex, setSelectedListIndex] = useState<number>()
 
     interface FormState {
