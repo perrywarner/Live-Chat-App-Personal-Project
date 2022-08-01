@@ -16,6 +16,7 @@ import { Message, User } from '../../../models'
 import { MessageMainItem } from '../components/MessageMainItem/MessageMainItem' // note: not picking up the index.ts in that directory for some reason
 import { MessageListItem } from '../components/MessageListItem'
 import { useAppDispatch, useAppSelector } from '../state/hooks'
+import { useGetMessagesQuery } from '../api/apiSlice'
 
 // local
 import './MessagePage.css'
@@ -46,24 +47,35 @@ interface MessagePageProps {
 }
 
 export const MessagePage: FC<MessagePageProps> = ({ loggedInAs }) => {
-    // const { total, filtered, filteredBy, requestStatus } =
-    //     useAppSelector(selectMessageState)
     const state = useAppSelector(selectMessageState)
     const dispatch = useAppDispatch()
 
-    console.info('Total Messages: ', state.total)
+    console.info('Total Redux Messages: ', state.total)
 
-    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    // BUGGED HERE
-    // * data fetch is ok: message data fetch on page load is executing and resolving w/ HTTP 200 OK & data
-    // * message reducer needs debugging: unfortunately it looks like messageSlice.extraReducers's Case: "rejected" is always getting called even when the request is supposed to fulfill..
-    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    useEffect(() => {
-        console.log('dispatching fetchTotalMessages')
-        dispatch(fetchTotalMessages())
-    }, [])
+    // // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // // BUGGED HERE
+    // // * data fetch is ok: message data fetch on page load is executing and resolving w/ HTTP 200 OK & data
+    // // * RTK Query needs debugging: unfortunately it looks like apiSlice.getMessages action: "rejected" is always the result even when the request is supposed to fulfill..
+    // // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // // NOTE
+    // // when bug is fixed (the Redux state is syncing with the API results and showing on the UI),
+    // // I can pick up where I left off with RTK Query tutorial at https://redux.js.org/tutorials/essentials/part-7-rtk-query-basics#displaying-posts-with-queries
+
+    const {
+        data: messages,
+        isLoading,
+        isSuccess,
+        isError,
+        error,
+    } = useGetMessagesQuery()
+
+    console.info('Total RTK Messages: ', messages)
+
+    if (error) {
+        console.error('RTK get messages error: ', error)
+    }
 
     const [selectedListIndex, setSelectedListIndex] = useState<number>()
 
@@ -102,7 +114,8 @@ export const MessagePage: FC<MessagePageProps> = ({ loggedInAs }) => {
                 </div>
                 <input placeholder="Search..." />
                 <List>
-                    {fakeMessages.map((message, index) => {
+                    {/* Uncomment "fakeMessages" block to sanity check the UI against the UI embedded w/ Redux logic */}
+                    {/* {fakeMessages.map((message, index) => {
                         return (
                             <MessageListItem
                                 message={message}
@@ -111,7 +124,45 @@ export const MessagePage: FC<MessagePageProps> = ({ loggedInAs }) => {
                                 key={index}
                             />
                         )
-                    })}
+                    })} */}
+                    {isLoading ? (
+                        <MessageListItem
+                            message={{
+                                data: 'Loading...',
+                                sentBy: 'Loading...',
+                                createTime: 0,
+                            }}
+                            selected={false}
+                            onClick={() => {
+                                console.log('loading clicked')
+                            }}
+                        />
+                    ) : null}
+                    {isError ? (
+                        <MessageListItem
+                            message={{
+                                data: 'Error!',
+                                sentBy: 'Error!',
+                                createTime: 0,
+                            }}
+                            selected={false}
+                            onClick={() => {
+                                console.log('Error! clicked')
+                            }}
+                        />
+                    ) : null}
+                    {isSuccess
+                        ? messages.map((message, index) => {
+                              return (
+                                  <MessageListItem
+                                      message={message}
+                                      selected={selectedListIndex === index}
+                                      onClick={() => handleListItemClick(index)}
+                                      key={index}
+                                  />
+                              )
+                          })
+                        : null}
                 </List>
                 {/* mockup shows "pinned" vs "all" messages, skipping "pinned" for now */}
             </div>
