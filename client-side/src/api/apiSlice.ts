@@ -8,12 +8,13 @@ import { baseUrl, messageUrl } from './constants'
 export const apiSlice = createApi({
     // The cache reducer expects to be added at `state.api` (already default - this is optional)
     reducerPath: 'api',
-    // All of our requests will have URLs starting with 'http://localhost:3001'
-    baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
+    // "baseUrl": All of our requests will have URLs starting with 'http://localhost:3001'
+    // "mode: 'no-cors'": All requests deny CORS by default. *****NOTE: this might need to change if I deploy the app to AWS or if I do something like call some third party APIs in the future*****
+    baseQuery: fetchBaseQuery({ baseUrl: baseUrl, mode: 'no-cors' }),
     // The "endpoints" represent operations and requests for this server
     endpoints: (builder) => ({
         getMessages: builder.query<Message[], void>({
-            query: () => ({ url: messageUrl, method: 'GET', mode: 'no-cors' }),
+            query: () => ({ url: messageUrl, method: 'GET' }),
         }),
         // // The `getPosts` endpoint is a "query" operation that returns data
         // getPosts: builder.query({
