@@ -3,6 +3,7 @@ import express, { Router } from 'express'
 import path from 'path'
 import cookieParser from 'cookie-parser'
 import logger from 'morgan'
+import cors from 'cors'
 
 // create & share singleton instances of our app's internal logic engines
 import { UserService, MessageService } from './services'
@@ -22,6 +23,19 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
+
+// Note: need a CORS allow for the origin of the UI request (initially localhost, future soemthing else).
+// I found the hard way that I CANNOT just send requests from the UI side with fetch request (mode: 'no-cors')
+// because fetch requests initiated with (mode: 'no-cors') behave like "Opaque Responses": you can see the network request tab in google chrome initially says query success OK 200 with data null and then a few ms later it is automagically populated with data.
+// Redux (base) and Redux (with RTK Query) both can't seem to handle these opaque responses and they only see the half-finished "resolve" (multi step resolve?) and immediately reject the network request - even if the request later resolves successfully.
+// * Shoutout to Kathy for helping me with this one!
+// * more info on CORS "opaque response" weirdness: https://stackoverflow.com/questions/36292537/what-is-an-opaque-response-and-what-purpose-does-it-serve
+// * followed tutorial: https://www.section.io/engineering-education/how-to-use-cors-in-nodejs-with-express/
+app.use(
+    cors({
+        origin: 'http://localhost:3000',
+    })
+)
 
 // !!!!!WARNING!!!!: these imports must be done AFTER "app" & "router" are initialized or else will get errors like:
 // /routes/indexRoute.ts:3: export const indexRoute = router.get('/', function (req, res, next) {

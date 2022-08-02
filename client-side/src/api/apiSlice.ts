@@ -9,8 +9,8 @@ export const apiSlice = createApi({
     // The cache reducer expects to be added at `state.api` (already default - this is optional)
     reducerPath: 'api',
     // "baseUrl": All of our requests will have URLs starting with 'http://localhost:3001'
-    // "mode: 'no-cors'": All requests deny CORS by default. *****NOTE: this might need to change if I deploy the app to AWS or if I do something like call some third party APIs in the future*****
-    baseQuery: fetchBaseQuery({ baseUrl: baseUrl, mode: 'no-cors' }),
+    // "mode: 'no-cors'": note to self - DONT USE THIS ONE!!! Redux / RTK ends up thinking every single request is rejected because of this "opaque response" weirdness: https://stackoverflow.com/questions/36292537/what-is-an-opaque-response-and-what-purpose-does-it-serve
+    baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
     // The "endpoints" represent operations and requests for this server
     endpoints: (builder) => ({
         getMessages: builder.query<Message[], void>({
