@@ -25,11 +25,5 @@ export const apiSlice = createApi({
     }),
 })
 
-//////////////////////
-// NOTE TO FUTURE SELF
-// * gave up on trying to get base Redux & Thunks to work for my Message API
-// * now, working from: https://redux.js.org/tutorials/essentials/part-7-rtk-query-basics#defining-an-api-slice
-//////////////////////
-
 // Export the auto-generated hook for the `getPosts` query endpoint
 export const { useGetMessagesQuery } = apiSlice
