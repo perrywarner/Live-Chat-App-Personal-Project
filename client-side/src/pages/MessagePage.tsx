@@ -16,7 +16,7 @@ import { Message, User } from '../../../models'
 import { MessageMainItem } from '../components/MessageMainItem/MessageMainItem' // note: not picking up the index.ts in that directory for some reason
 import { MessageListItem } from '../components/MessageListItem'
 import { useAppDispatch, useAppSelector } from '../state/hooks'
-import { useGetMessagesQuery } from '../api/apiSlice'
+import { useGetMessageQuery, useGetMessagesQuery } from '../api/apiSlice'
 
 // local
 import './MessagePage.css'
@@ -70,6 +70,8 @@ export const MessagePage: FC<MessagePageProps> = ({ loggedInAs }) => {
         isError,
         error,
     } = useGetMessagesQuery()
+
+    const test = useGetMessageQuery('coolguy32')
 
     console.info('Total RTK Messages: ', messages)
 

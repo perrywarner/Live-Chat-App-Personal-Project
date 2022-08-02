@@ -16,6 +16,13 @@ export const apiSlice = createApi({
         getMessages: builder.query<Message[], void>({
             query: () => ({ url: messageUrl, method: 'GET' }),
         }),
+        getMessage: builder.query<Message, string>({
+            query: (username) => ({
+                url: messageUrl,
+                method: 'GET',
+                params: { sentBy: username },
+            }),
+        }),
         // // The `getPosts` endpoint is a "query" operation that returns data
         // getPosts: builder.query({
         //     // The URL for the request is '/fakeApi/posts'
@@ -27,4 +34,4 @@ export const apiSlice = createApi({
 })
 
 // Export the auto-generated hook for the `getPosts` query endpoint
-export const { useGetMessagesQuery } = apiSlice
+export const { useGetMessagesQuery, useGetMessageQuery } = apiSlice
