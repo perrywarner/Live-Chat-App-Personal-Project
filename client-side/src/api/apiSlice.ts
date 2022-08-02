@@ -23,13 +23,6 @@ export const apiSlice = createApi({
                 params: { sentBy: username },
             }),
         }),
-        // // The `getPosts` endpoint is a "query" operation that returns data
-        // getPosts: builder.query({
-        //     // The URL for the request is '/fakeApi/posts'
-        //     query: () => '/posts',
-        // // // Example 2: Query params
-        //     query: (id) => ({ url: `post/${id}` }),
-        // }),
     }),
 })
 
