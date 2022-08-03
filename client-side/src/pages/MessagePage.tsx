@@ -1,5 +1,5 @@
 // third party
-import React, { FC, useState, useEffect } from 'react'
+import React, { FC, useState } from 'react'
 import { Box, Typography } from '@mui/material'
 import List from '@mui/material/List'
 import Paper from '@mui/material/Paper'
@@ -15,16 +15,10 @@ import SendIcon from '@mui/icons-material/Send'
 import { Message, User } from '../../../models'
 import { MessageMainItem } from '../components/MessageMainItem/MessageMainItem' // note: not picking up the index.ts in that directory for some reason
 import { MessageListItem } from '../components/MessageListItem'
-import { useAppDispatch, useAppSelector } from '../state/hooks'
 import { useGetMessageQuery, useGetMessagesQuery } from '../api/apiSlice'
 
 // local
 import './MessagePage.css'
-import {
-    selectMessageState,
-    fetchTotalMessages,
-    changeMessageThread,
-} from './messageSlice'
 
 const fakeMessages: Message[] = [
     {
@@ -47,37 +41,14 @@ interface MessagePageProps {
 }
 
 export const MessagePage: FC<MessagePageProps> = ({ loggedInAs }) => {
-    const state = useAppSelector(selectMessageState)
-    const dispatch = useAppDispatch()
-
-    console.info('Total Redux Messages: ', state.total)
-
-    // // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    // // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    // // BUGGED HERE
-    // // * data fetch is ok: message data fetch on page load is executing and resolving w/ HTTP 200 OK & data
-    // // * RTK Query needs debugging: unfortunately it looks like apiSlice.getMessages action: "rejected" is always the result even when the request is supposed to fulfill..
-    // // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    // // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    // // NOTE
-    // // when bug is fixed (the Redux state is syncing with the API results and showing on the UI),
-    // // I can pick up where I left off with RTK Query tutorial at https://redux.js.org/tutorials/essentials/part-7-rtk-query-basics#displaying-posts-with-queries
-
     const {
         data: messages,
         isLoading,
         isSuccess,
         isError,
-        error,
     } = useGetMessagesQuery()
 
     const test = useGetMessageQuery('coolguy32')
-
-    console.info('Total RTK Messages: ', messages)
-
-    if (error) {
-        console.error('RTK get messages error: ', error)
-    }
 
     const [selectedListIndex, setSelectedListIndex] = useState<number>()
 
@@ -116,17 +87,6 @@ export const MessagePage: FC<MessagePageProps> = ({ loggedInAs }) => {
                 </div>
                 <input placeholder="Search..." />
                 <List>
-                    {/* Uncomment "fakeMessages" block to sanity check the UI against the UI embedded w/ Redux logic */}
-                    {/* {fakeMessages.map((message, index) => {
-                        return (
-                            <MessageListItem
-                                message={message}
-                                selected={selectedListIndex === index}
-                                onClick={() => handleListItemClick(index)}
-                                key={index}
-                            />
-                        )
-                    })} */}
                     {isLoading ? (
                         <MessageListItem
                             message={{
