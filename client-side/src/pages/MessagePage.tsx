@@ -10,10 +10,12 @@ import InputLabel from '@mui/material/InputLabel'
 import InputAdornment from '@mui/material/InputAdornment'
 import FormControl from '@mui/material/FormControl'
 import SendIcon from '@mui/icons-material/Send'
+import Skeleton from '@mui/material/Skeleton'
 
 // intra-app
 import { Message, User } from '../../../models'
 import { MessageMainItem } from '../components/MessageMainItem/MessageMainItem' // note: not picking up the index.ts in that directory for some reason
+import { MessageList } from '../components/MessageList'
 import { MessageListItem } from '../components/MessageListItem'
 import { useGetMessageQuery, useGetMessagesQuery } from '../api/apiSlice'
 
@@ -41,15 +43,11 @@ interface MessagePageProps {
 }
 
 export const MessagePage: FC<MessagePageProps> = ({ loggedInAs }) => {
-    const {
-        data: messages,
-        isLoading,
-        isSuccess,
-        isError,
-    } = useGetMessagesQuery()
+    // const test = useGetMessageQuery('coolguy32')
 
-    const test = useGetMessageQuery('coolguy32')
-
+    // TODO swap this state from index of selected to Message.sentBy, and then use that sentBy (when changed) to GET messages sentBy={user}.
+    // reasoning: I want to switch GET Messages to instead be something like GET Threads where threads are tied to sentBy.
+    // reasoning(cont): when this happens, the "message details" pane won't work right unless its messages list is a derived query from state change on the selected thread
     const [selectedListIndex, setSelectedListIndex] = useState<number>()
 
     interface FormState {
@@ -74,60 +72,16 @@ export const MessagePage: FC<MessagePageProps> = ({ loggedInAs }) => {
         // link to it: https://mui.com/material-ui/react-snackbar/#customization
     }
 
-    const handleListItemClick = (nextIndex: number) => {
-        setSelectedListIndex(nextIndex)
+    const handleListItemClick = (nextSelected: number) => {
+        setSelectedListIndex(nextSelected)
     }
 
     return (
         <div className="message-page-root">
-            <div className="message-list">
-                <div className="message-list-header">
-                    <h1>Messages</h1>
-                    <p>(edit icon)</p>
-                </div>
-                <input placeholder="Search..." />
-                <List>
-                    {isLoading ? (
-                        <MessageListItem
-                            message={{
-                                data: 'Loading...',
-                                sentBy: 'Loading...',
-                                createTime: 0,
-                            }}
-                            selected={false}
-                            onClick={() => {
-                                console.log('loading clicked')
-                            }}
-                        />
-                    ) : null}
-                    {isError ? (
-                        <MessageListItem
-                            message={{
-                                data: 'Error!',
-                                sentBy: 'Error!',
-                                createTime: 0,
-                            }}
-                            selected={false}
-                            onClick={() => {
-                                console.log('Error! clicked')
-                            }}
-                        />
-                    ) : null}
-                    {isSuccess
-                        ? messages.map((message, index) => {
-                              return (
-                                  <MessageListItem
-                                      message={message}
-                                      selected={selectedListIndex === index}
-                                      onClick={() => handleListItemClick(index)}
-                                      key={index}
-                                  />
-                              )
-                          })
-                        : null}
-                </List>
-                {/* mockup shows "pinned" vs "all" messages, skipping "pinned" for now */}
-            </div>
+            <MessageList
+                selectedIndex={selectedListIndex}
+                onIndexChange={handleListItemClick}
+            />
             <div className="message-main">
                 <Typography variant="h3" sx={{ flex: 1 }}>
                     Design Team
