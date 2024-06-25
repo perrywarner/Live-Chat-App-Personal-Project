@@ -1,4 +1,3 @@
-// third party
 import React, {
     useState,
     FC,
@@ -7,10 +6,10 @@ import React, {
     useEffect,
 } from 'react'
 
-// intra-app
 import { User } from '../../../../models'
 import { useUser } from '../../hooks/user'
 import { IconSubmit } from '../IconSubmit'
+import { List, ListItem, TextField, Typography } from '@mui/material'
 
 interface LoginProps {
     onLogin: (selectedUser: User) => void
@@ -44,27 +43,25 @@ export const Login: FC<LoginProps> = ({ onLogin }) => {
 
     return (
         <div>
-            <h2>Choose a user:</h2>
+            <Typography variant='h2'>Choose a user:</Typography>
             {!isLoading.get && users ? (
-                <ul>
+                <List>
                     {users.map((user) => (
-                        <li onClick={handleListItemClick} key={user.name}>
+                        <ListItem onClick={handleListItemClick} key={user.name} >
                             {user.name}
-                        </li>
+                        </ListItem>
                     ))}
-                    <li>
-                        <input onChange={handleInputChange} /> &nbsp;
+                    <ListItem>
+                        <TextField onChange={handleInputChange} /> &nbsp;
                         <IconSubmit
                             isLoading={isLoading.put}
                             onClick={handleCreate}
                         />
-                    </li>
-                </ul>
+                    </ListItem>
+                </List>
             ) : (
-                <p>Loading...</p>
+                <Typography variant="h2">Loading...</Typography>
             )}
         </div>
     )
 }
-
-/* crappy divider: <div style={{ width: '3rem', height: '1px', color: 'black', paddingBottom: '1rem'}} /> */
