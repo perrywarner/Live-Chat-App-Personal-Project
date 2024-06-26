@@ -1,6 +1,7 @@
 import { User } from './User'
 
 export interface Message {
+    id: number
     data: string
     sentBy: User['name']
     createTime: number

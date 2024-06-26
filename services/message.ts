@@ -1,3 +1,4 @@
+import { randomInt } from 'crypto'
 import { Message, MessageCreateRequest } from '../models'
 import { messageData } from '../test/mockData'
 
@@ -11,6 +12,7 @@ export class MessageService {
     create(submitted: MessageCreateRequest) {
         // TODO don't create message if sentBy not in Users
         const newMessage: Message = {
+            id: randomInt(0, 65536),
             data: submitted.data,
             sentBy: submitted.sentBy,
             createTime: Date.now(),

@@ -1,8 +1,8 @@
 import { Message } from './Message'
 
 export interface User {
+    id: number
     name: string
-    sentMessages: Message[]
 }
 
 // create User is sent to API only with name attribute

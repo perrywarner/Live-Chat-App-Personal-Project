@@ -1,3 +1,4 @@
+import { randomInt } from 'crypto'
 import { User, UserCreateRequest, Message } from '../models'
 import { userData } from '../test/mockData'
 
@@ -16,29 +17,13 @@ export class UserService {
         const existing = this.users.get(submitted.name)
         if (!existing) {
             const newUser: User = {
+                id: randomInt(0, 65536),
                 name: submitted.name,
-                sentMessages: [],
             }
             this.users.set(submitted.name, newUser)
             return newUser
         } else {
             return false
-        }
-    }
-
-    addSentMessage(userName: User['name'], newMessage: Message) {
-        const prevState = this.users.get(userName)
-        if (!prevState) {
-            console.error(
-                `tried to update sent messages of username ${userName} but no user with name ${userName} exists.`
-            )
-            // if this is a problem in the future, could maybe try to remedy the situation by doing something like creating a new user with the sent username
-        } else {
-            const nextState = {
-                ...prevState,
-                sentMessages: [...prevState.sentMessages, newMessage],
-            }
-            this.users.set(userName, nextState)
         }
     }
 }
