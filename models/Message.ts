@@ -13,3 +13,7 @@ export interface MessageCreateRequest {
     data: Message['data']
     sentBy: Message['sentBy']
 }
+
+export interface MessageGetQueryParams {
+    sentBy?: Message['sentBy']
+}

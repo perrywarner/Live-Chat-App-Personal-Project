@@ -9,6 +9,6 @@ import { Message } from '../models'
 // as a result, this is a key thing I wanted to test but had to be omitted from the UserService <=> MessageService Integration Tests.
 //
 // (note valid as of 6/30/22)
-export const addNewMessageToUserSentBy = (newMessage: Message) => {
-    User.addSentMessage(newMessage.sentBy, newMessage)
-}
+// export const addNewMessageToUserSentBy = (newMessage: Message) => {
+//     User.addSentMessage(newMessage.sentBy, newMessage)
+// }

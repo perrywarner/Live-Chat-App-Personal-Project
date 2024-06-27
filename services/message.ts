@@ -1,5 +1,5 @@
 import { randomInt } from 'crypto'
-import { Message, MessageCreateRequest } from '../models'
+import { Message, MessageCreateRequest, MessageGetQueryParams } from '../models'
 import { messageData } from '../test/mockData'
 
 export class MessageService {
@@ -22,15 +22,16 @@ export class MessageService {
     }
 
     // potential TODO: maybe add queryBy Message['data']
-    queryBy(query: Message['sentBy'] | Message['createTime']) {
-        switch (typeof query) {
-            case 'number':
-                return this.messages.get(query)
-            case 'string':
-                return Array.from(this.messages.values()).filter((message) => {
-                    return query === message.sentBy
-                })
+    queryBy({ sentBy }: MessageGetQueryParams) {
+        let response: Message[] = [];
+
+        if (sentBy) {
+            response = Array.from(this.messages.values()).filter((message) => {
+                return sentBy === message.sentBy
+            })
         }
+
+        return response;
     }
 
     /* WIP

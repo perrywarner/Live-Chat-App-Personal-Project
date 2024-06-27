@@ -1,12 +1,11 @@
 import { router, Message } from '../app'
 import { MessageCreateRequest } from '../models'
-import { addNewMessageToUserSentBy } from '../utils/runtimeSync'
 
 export const messagesRoute = router.get('/messages', (req, res) => {
     if (req.query.hasOwnProperty('sentBy')) {
-        // workaround for "Property 'sentBy' does not exist on type '{}'.ts(2339)"
+        // "as" type assertion added because Express.req.query isn't typesafe (is "any")
         const typecastParams = req.query as { sentBy: string }
-        const queryResult = Message.queryBy(typecastParams.sentBy)
+        const queryResult = Message.queryBy({ sentBy: typecastParams.sentBy })
         if (queryResult !== undefined) {
             res.json(queryResult)
         } else res.json([])
@@ -21,7 +20,6 @@ export const createMessage = router.post('/messages', (req, res) => {
         const submittedMessage: MessageCreateRequest = req.body
         const createResult = Message.create(submittedMessage)
         if (createResult) {
-            addNewMessageToUserSentBy(createResult)
             return res.status(201).json(createResult)
         } else {
             return res.status(400)
