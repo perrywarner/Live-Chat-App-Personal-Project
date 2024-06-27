@@ -30,7 +30,7 @@ const filterByUsername = (
     choice: MessageState['filteredBy']
 ) => {
     return messages.filter((message) => {
-        return choice === message.sentBy
+        return choice === message.author
     })
 }
 

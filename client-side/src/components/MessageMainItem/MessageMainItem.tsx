@@ -15,18 +15,18 @@ export const MessageMainItem: FC<MessageMainItemProps> = ({
     message,
     loggedInAs,
 }) => {
-    const sentBySelf = message.sentBy === loggedInAs.name
+    const authorSelf = message.author === loggedInAs.name
 
     return (
         <Grid
             item
             xs={8}
-            sx={{ alignSelf: sentBySelf ? 'flex-end' : 'flex-start' }}
+            sx={{ alignSelf: authorSelf ? 'flex-end' : 'flex-start' }}
         >
             <Typography variant="subtitle1">
-                {sentBySelf
+                {authorSelf
                     ? `You (logged in as ${loggedInAs.name})`
-                    : message.sentBy}
+                    : message.author}
             </Typography>
             <Typography variant="body1">{message.data}</Typography>
         </Grid>

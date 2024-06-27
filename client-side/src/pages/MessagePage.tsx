@@ -25,17 +25,17 @@ import './MessagePage.css'
 const fakeMessages: Message[] = [
     {
         data: 'Have a great working week!',
-        sentBy: 'Putri Tanjak',
+        author: 'Putri Tanjak',
         createTime: 0,
     },
     {
         data: 'This new landing page, What do you think?',
-        sentBy: 'Ahmed Medi',
+        author: 'Ahmed Medi',
         createTime: 1,
     },
-    { data: '(img)', sentBy: 'Ahmed Medi', createTime: 2 },
-    { data: '(Audio)', sentBy: 'Milie Nose', createTime: 3 },
-    { data: 'Ok maszeehh!', sentBy: 'MyFirstUser', createTime: 4 },
+    { data: '(img)', author: 'Ahmed Medi', createTime: 2 },
+    { data: '(Audio)', author: 'Milie Nose', createTime: 3 },
+    { data: 'Ok maszeehh!', author: 'MyFirstUser', createTime: 4 },
 ]
 
 interface MessagePageProps {
@@ -45,8 +45,8 @@ interface MessagePageProps {
 export const MessagePage: FC<MessagePageProps> = ({ loggedInAs }) => {
     // const test = useGetMessageQuery('coolguy32')
 
-    // TODO swap this state from index of selected to Message.sentBy, and then use that sentBy (when changed) to GET messages sentBy={user}.
-    // reasoning: I want to switch GET Messages to instead be something like GET Threads where threads are tied to sentBy.
+    // TODO swap this state from index of selected to Message.author, and then use that author (when changed) to GET messages author={user}.
+    // reasoning: I want to switch GET Messages to instead be something like GET Threads where threads are tied to author.
     // reasoning(cont): when this happens, the "message details" pane won't work right unless its messages list is a derived query from state change on the selected thread
     const [selectedListIndex, setSelectedListIndex] = useState<number>()
 
@@ -60,9 +60,9 @@ export const MessagePage: FC<MessagePageProps> = ({ loggedInAs }) => {
 
     const handleChange =
         (prop: keyof FormState) =>
-        (event: React.ChangeEvent<HTMLInputElement>) => {
-            setValues({ ...values, [prop]: event.target.value })
-        }
+            (event: React.ChangeEvent<HTMLInputElement>) => {
+                setValues({ ...values, [prop]: event.target.value })
+            }
 
     const handleSendMessage = () => {
         console.info(`Tried to send a new message!`, values.newMessage)

@@ -10,11 +10,11 @@ export class MessageService {
     }
 
     create(submitted: MessageCreateRequest) {
-        // TODO don't create message if sentBy not in Users
+        // TODO don't create message if author not in Users
         const newMessage: Message = {
             id: randomInt(0, 65536),
             data: submitted.data,
-            sentBy: submitted.sentBy,
+            author: submitted.author,
             createTime: Date.now(),
         }
         this.messages.set(newMessage.createTime, newMessage)
@@ -22,12 +22,12 @@ export class MessageService {
     }
 
     // potential TODO: maybe add queryBy Message['data']
-    queryBy({ sentBy }: MessageGetQueryParams) {
+    queryBy({ author }: MessageGetQueryParams) {
         let response: Message[] = [];
 
-        if (sentBy) {
+        if (author) {
             response = Array.from(this.messages.values()).filter((message) => {
-                return sentBy === message.sentBy
+                return author === message.author
             })
         }
 

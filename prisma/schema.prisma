@@ -10,8 +10,8 @@ model User {
 model Message {
   id Int @id @default(autoincrement())
   data String
-  sentBy User @relation(fields: [sentById], references: [id])
-  sentById Int
+  author User @relation(fields: [authorId], references: [id])
+  authorId Int
 }
 
 generator client {

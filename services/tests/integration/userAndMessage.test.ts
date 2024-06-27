@@ -21,32 +21,32 @@ describe('Integration: User Service with Message Service', () => {
         expect(result).toStrictEqual(expected)
     })
 
-    test('when Message is created, it should have been sentBy a valid User', () => {
+    test('when Message is created, it should have been author a valid User', () => {
         const mockSubmission: MessageCreateRequest = {
             data: 'Mock Submitted Message',
-            sentBy: 'coolguy32',
+            author: 'coolguy32',
         }
 
-        const existingUser = userInstance.users.get(mockSubmission.sentBy)
+        const existingUser = userInstance.users.get(mockSubmission.author)
         expect(existingUser).not.toBeUndefined()
 
         const expected: Message[] = [
             messageData[1],
             {
                 ...mockSubmission,
-                sentBy: existingUser!.name,
+                author: existingUser!.name,
                 createTime: Date.now(),
             },
         ]
 
         messageInstance.create(mockSubmission)
-        const result = messageInstance.queryBy(mockSubmission.sentBy)
+        const result = messageInstance.queryBy(mockSubmission.author)
         expect(result).toStrictEqual(expected)
     })
 
-    // can't figure out how to do this test. I explain why in comments above "/utils/runtimeSync:addNewMessageToUserSentBy()"
+    // can't figure out how to do this test. I explain why in comments above "/utils/runtimeSync:addNewMessageToUserauthor()"
     // TODO revisit in future since it'd protect against a bug I saw & fixed (title was "[BE] [FIX] "sentMessages" of User in GET Users does not contain new Messages that get created")
     it.todo(
-        'after creating a Message, the corresponding User that the Message was sentBy should have sentMessages that contains the new Message'
+        'after creating a Message, the corresponding User that the Message was author should have sentMessages that contains the new Message'
     )
 })
