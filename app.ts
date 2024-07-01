@@ -4,6 +4,9 @@ import path from 'path'
 import cookieParser from 'cookie-parser'
 import logger from 'morgan'
 import cors from 'cors'
+import { Sequelize } from 'sequelize';
+import { config } from 'dotenv';
+config();
 
 // create & share singleton instances of our app's internal logic engines
 import { UserService, MessageService } from './services'
@@ -13,6 +16,26 @@ export const Message = new MessageService()
 // creates instances of Express framework & Express's URL Router that will be referenced across the backend (singletons)
 export const app = express()
 export const router = Router()
+
+// Connect to PostgreSQL
+const RDS_URL = process.env.RDS_DATABASE_URL;
+if (!RDS_URL) {
+    console.log('imported the following env vars:', config().parsed)
+    throw new Error('Missing required environment variable: RDS_DATABASE_URL');
+} else {
+    const sequelize = new Sequelize(RDS_URL, {
+        dialect: 'postgres',
+      });
+    
+    sequelize.authenticate()
+      .then(() => {
+        console.log('Connection has been established successfully.');
+      })
+      .catch(err => {
+        console.error('Unable to connect to the database:', err);
+      });
+}
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
@@ -40,10 +63,11 @@ app.use(
 // !!!!!WARNING!!!!: these imports must be done AFTER "app" & "router" are initialized or else will get errors like:
 // /routes/indexRoute.ts:3: export const indexRoute = router.get('/', function (req, res, next) {
 // TypeError: Cannot read properties of undefined (reading 'get')
-import { indexRoute, usersRoute, messagesRoute } from './routes'
+import { indexRoute, usersRoute, messagesRoute, dbTestRoute } from './routes'
 app.use('/', indexRoute)
 app.use('/users', usersRoute)
 app.use('/messages', messagesRoute)
+app.use('/dbTest', dbTestRoute)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -62,11 +62,11 @@ Sources:
     1. Check logged in as "postgres": prompt should be `postgres@(computer):~$`
     2. `psql`
     3. `\l`
-    4. Check: **should NOT** see a line that looks like `postgres | postgres | UTF8 | C.UTF-8 | C.UTF-8 |`
+    4. Check: **should NOT** see a line that looks like `prisma | postgres | UTF8 | C.UTF-8 | C.UTF-8 |`
     5. `createdb prisma`
     6. `psql`
     7. `\l`
-    8. Check: compared to before, **should** see a new line and it should look like `postgres | postgres | UTF8 | C.UTF-8 | C.UTF-8 |`
+    8. Check: compared to before, **should** see a new line and it should look like `prisma | postgres | UTF8 | C.UTF-8 | C.UTF-8 |`
 7. **Setup ".env" file** to let [Prisma know how to connect to Postgres](https://www.prisma.io/docs/concepts/database-connectors/postgresql#example)
     1. Navigate to project root: `cd` to same directory as `package.json` (_not_ `client-side/package.json`)
     2. Create ".env" file: `touch .env` - will create if ".env" doesn't exist, [does nothing otherwise](https://unix.stackexchange.com/a/427240)

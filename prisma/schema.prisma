@@ -2,15 +2,15 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 model User {
-  id Int @id @default(autoincrement())
-  name String
-  sentMessages Message[]
+  id      Int       @id @default(autoincrement())
+  name    String
+  Message Message[]
 }
 
 model Message {
-  id Int @id @default(autoincrement())
-  data String
-  author User @relation(fields: [authorId], references: [id])
+  id       Int    @id @default(autoincrement())
+  data     String
+  author   User   @relation(fields: [authorId], references: [id])
   authorId Int
 }
 
@@ -20,5 +20,5 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+   url      = env("DATABASE_URL")
 }

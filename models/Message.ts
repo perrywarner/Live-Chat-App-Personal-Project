@@ -3,17 +3,17 @@ import { User } from './User'
 export interface Message {
     id: number
     data: string
-    author: User['name']
+    sentBy: User['name']
     createTime: number
 }
 
-// Messages are sent to the API with only the data and author.
+// Messages are sent to the API with only the data and sentBy.
 // Then, the API enriches with metadata like createTime.
 export interface MessageCreateRequest {
     data: Message['data']
-    author: Message['author']
+    sentBy: Message['sentBy']
 }
 
 export interface MessageGetQueryParams {
-    author?: Message['author']
+    sentBy?: Message['sentBy']
 }
