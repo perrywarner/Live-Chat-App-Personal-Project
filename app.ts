@@ -23,7 +23,7 @@ if (!RDS_URL) {
     console.log('imported the following env vars:', config().parsed)
     throw new Error('Missing required environment variable: RDS_DATABASE_URL');
 } else {
-    const sequelize = new Sequelize(RDS_URL, {
+    const sequelize = new Sequelize(encodeURI(RDS_URL), {
         dialect: 'postgres',
       });
     
