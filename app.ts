@@ -44,7 +44,8 @@ app.set('view engine', 'jade')
 app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
-app.use(cookieParser())
+// According to https://expressjs.com/en/resources/middleware/cookie-parser.html, app.use(cookieParser()) should be fine.. Using a type assertion here.
+app.use(cookieParser() as any)
 app.use(express.static(path.join(__dirname, 'public')))
 
 // Note: need a CORS allow for the origin of the UI request (initially localhost:3001 (where this server is localhost:3000), future something else).
