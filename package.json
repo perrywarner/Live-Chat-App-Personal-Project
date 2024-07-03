@@ -12,7 +12,8 @@
         "test:users": "curl http://localhost:3001/users",
         "compile": "tsc",
         "format": "yarn prettier --write .",
-        "format-check": "yarn prettier --check ."
+        "format-check": "yarn prettier --check .",
+        "connect-to-ec2": "bash ./scripts/ssh_to_ec2.sh"
     },
     "engines": {
         "node": ">=16.14.0"
