@@ -18,14 +18,31 @@ export const app = express()
 export const router = Router()
 
 // Connect to PostgreSQL
-const RDS_URL = process.env.RDS_DATABASE_URL;
-if (!RDS_URL) {
+// const RDS_URL = process.env.RDS_DATABASE_URL;
+const RDS_DB_NAME = process.env.RDS_DB_NAME;
+const RDS_USERNAME = process.env.RDS_USERNAME;
+const RDS_PASSWORD = process.env.RDS_PASSWORD;
+const RDS_URL = process.env.RDS_URL;
+
+if (!RDS_URL || !RDS_DB_NAME || !RDS_PASSWORD || !RDS_USERNAME) {
     console.log('imported the following env vars:', config().parsed)
     throw new Error('Missing required environment variable: RDS_DATABASE_URL');
 } else {
-    const sequelize = new Sequelize(encodeURI(RDS_URL), {
-        dialect: 'postgres',
-      });
+    // const sequelize = new Sequelize(encodeURI(RDS_URL), {
+    //     dialect: 'postgres',
+    //   });
+    const sequelize = new Sequelize(RDS_DB_NAME, RDS_USERNAME, RDS_PASSWORD, {
+      host: RDS_URL,
+      dialect: 'postgres',
+      port: 5432,
+      dialectOptions: {
+        ssl: {
+          require: false,
+          rejectUnauthorized: false // adjust based on your SSL settings
+        }
+      }
+    });
+    
     
     sequelize.authenticate()
       .then(() => {
