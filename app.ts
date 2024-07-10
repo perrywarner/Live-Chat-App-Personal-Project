@@ -6,27 +6,29 @@ import logger from 'morgan'
 import cors from 'cors'
 import { Sequelize } from 'sequelize';
 import { config } from 'dotenv';
-config();
 
-// create & share singleton instances of our app's internal logic engines
-import { UserService, MessageService } from './services'
-export const User = new UserService()
-export const Message = new MessageService()
+// Load .env file contents into process.env
+config();
 
 // creates instances of Express framework & Express's URL Router that will be referenced across the backend (singletons)
 export const app = express()
 export const router = Router()
 
-// Connect to PostgreSQL
+// Connect to PostgreSQL via the Sequelize ORM
+export let dbConnection: Sequelize | undefined = undefined;
+
 const RDS_DB_NAME = process.env.RDS_DB_NAME;
 const RDS_USERNAME = process.env.RDS_USERNAME;
 const RDS_PASSWORD = process.env.RDS_PASSWORD;
 const RDS_URL = process.env.RDS_URL;
+
+import { setupMessageModel, setupUserModel } from './models/index'
 if (!RDS_URL || !RDS_DB_NAME || !RDS_PASSWORD || !RDS_USERNAME) {
     console.log('imported the following env vars:', config().parsed)
     throw new Error('Missing required environment variable: RDS_DATABASE_URL');
 } else {
-    const sequelize = new Sequelize(RDS_DB_NAME, RDS_USERNAME, RDS_PASSWORD, {
+    // Set up the DB connection
+    dbConnection = new Sequelize(RDS_DB_NAME, RDS_USERNAME, RDS_PASSWORD, {
       host: RDS_URL,
       dialect: 'postgres',
       port: 5432,
@@ -35,11 +37,13 @@ if (!RDS_URL || !RDS_DB_NAME || !RDS_PASSWORD || !RDS_USERNAME) {
           require: false, // TODO turn SSL back on!!!!! (also requires tweaking RDS -> parameter groups -> parameters -> rds.force_ssl -> 1 [instead of current 0] -> reboot)
           rejectUnauthorized: false // adjust based on your SSL settings
         }
-      }
+      },
+      // TODO in future: if I'm finding the "console log every query" too spammy or something, tune this to something else via https://sequelize.org/docs/v6/getting-started/#logging
+      logging: console.log, // This is the default behavior, just making it explicit for visibility.
     });
     
-    
-    sequelize.authenticate()
+    // Check that it works
+    dbConnection.authenticate()
       .then(() => {
         console.log('Connection has been established successfully.');
       })
@@ -48,6 +52,14 @@ if (!RDS_URL || !RDS_DB_NAME || !RDS_PASSWORD || !RDS_USERNAME) {
       });
 }
 
+// Set up our Sequelize Models which are basically our DB Tables. More info at https://sequelize.org/docs/v6/core-concepts/model-basics/#concept
+export const MessageTable = await setupMessageModel(dbConnection);
+export const UserTable = await setupUserModel(dbConnection);
+
+// create and share singletons of our app's internal services
+import { UserService, MessageService } from './services'
+export const User = new UserService()
+export const Message = new MessageService()
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
