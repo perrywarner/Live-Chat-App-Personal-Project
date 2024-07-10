@@ -43,6 +43,7 @@ if (!RDS_URL || !RDS_DB_NAME || !RDS_PASSWORD || !RDS_USERNAME) {
     });
     
     // Check that it works
+    console.log('\n✨ Attempting to connect to the Postgres DB via our Sequelize ORM ✨')
     dbConnection.authenticate()
       .then(() => {
         console.log('Connection has been established successfully.');

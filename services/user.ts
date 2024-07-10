@@ -10,8 +10,10 @@ export class UserService {
     constructor(dbConnection: Sequelize) {
         this.users = new Map(keyedUserData)
         // Set up our Sequelize Models which are basically our DB Tables. More info at https://sequelize.org/docs/v6/core-concepts/model-basics/#concept
+        console.log('\n✨ Creating the User Table ✨')
         setupUserModel(dbConnection).then((table) => {
             this.usersTable = table;
+            console.log('✅ Successfully created the User Table')
         }).catch((error) => {
             throw new Error('Failed to create the User table:', error)
         })

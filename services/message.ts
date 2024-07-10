@@ -10,8 +10,10 @@ export class MessageService {
     constructor(dbConnection: Sequelize) {
         this.messages = new Map(keyedMessageData)
         // Set up our Sequelize Models which are basically our DB Tables. More info at https://sequelize.org/docs/v6/core-concepts/model-basics/#concept
+        console.log('\n✨ Creating the Message Table ✨')
         setupMessageModel(dbConnection).then((table) => {
             this.messagesTable = table;
+            console.log('✅ Successfully created the Message Table')
         }).catch((error) => {
             throw new Error('Failed to create the Message table:', error)
         })
