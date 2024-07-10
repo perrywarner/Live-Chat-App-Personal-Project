@@ -1,13 +1,20 @@
 import { randomInt } from 'crypto'
-import { User, UserCreateRequest, Message } from '../models'
+import { User, UserCreateRequest, Message, setupUserModel } from '../models'
 import { userData } from '../test/mockData'
-import { UserTable } from '../app'
+import { Model, ModelCtor, Sequelize } from 'sequelize'
 
 export class UserService {
     users: Map<User['name'], User>
+    usersTable: ModelCtor<Model<any, any>> | undefined
 
-    constructor() {
+    constructor(dbConnection: Sequelize) {
         this.users = new Map(keyedUserData)
+        // Set up our Sequelize Models which are basically our DB Tables. More info at https://sequelize.org/docs/v6/core-concepts/model-basics/#concept
+        setupUserModel(dbConnection).then((table) => {
+            this.usersTable = table;
+        }).catch((error) => {
+            throw new Error('Failed to create the User table:', error)
+        })
     }
 
     getList() {
@@ -26,7 +33,10 @@ export class UserService {
             }
             // info: if I wanted to create an instance here but not save it until later, I could do a table.build() here -> table.save() later.
             // Reference: https://sequelize.org/docs/v6/core-concepts/model-instances/#creating-an-instance
-            const newDbUser = await UserTable.create({ name: submitted.name })
+            if (!this.usersTable) {
+                throw new Error('Tried to create a User but usersTable has not yet been initialized')
+            }
+            const newDbUser = await this.usersTable.create({ name: submitted.name })
             console.log('created new user in DB: ', newDbUser.toJSON())
             this.users.set(submitted.name, newUser)
             return newUser

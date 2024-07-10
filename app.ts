@@ -4,7 +4,7 @@ import path from 'path'
 import cookieParser from 'cookie-parser'
 import logger from 'morgan'
 import cors from 'cors'
-import { Sequelize } from 'sequelize';
+import { Model, ModelCtor, Sequelize } from 'sequelize';
 import { config } from 'dotenv';
 
 // Load .env file contents into process.env
@@ -52,14 +52,10 @@ if (!RDS_URL || !RDS_DB_NAME || !RDS_PASSWORD || !RDS_USERNAME) {
       });
 }
 
-// Set up our Sequelize Models which are basically our DB Tables. More info at https://sequelize.org/docs/v6/core-concepts/model-basics/#concept
-export const MessageTable = await setupMessageModel(dbConnection);
-export const UserTable = await setupUserModel(dbConnection);
-
 // create and share singletons of our app's internal services
 import { UserService, MessageService } from './services'
-export const User = new UserService()
-export const Message = new MessageService()
+export const User = new UserService(dbConnection)
+export const Message = new MessageService(dbConnection)
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
