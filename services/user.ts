@@ -24,8 +24,11 @@ export class UserService {
             )
         }
         const userListQueryResult = await this.usersTable.findAll()
-        console.log('User list query result: ', userListQueryResult)
-        return userListQueryResult
+        const userList = userListQueryResult.map((queryResult) => {
+            return queryResult.toJSON()
+        })
+        console.log('User list query result: ', userList)
+        return userList
     }
 
     async create(submitted: UserCreateRequest) {
