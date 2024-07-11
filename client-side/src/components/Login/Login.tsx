@@ -43,11 +43,11 @@ export const Login: FC<LoginProps> = ({ onLogin }) => {
 
     return (
         <div>
-            <Typography variant='h2'>Choose a user:</Typography>
+            <Typography variant="h2">Choose a user:</Typography>
             {!isLoading.get && users ? (
                 <List>
                     {users.map((user) => (
-                        <ListItem onClick={handleListItemClick} key={user.name} >
+                        <ListItem onClick={handleListItemClick} key={user.name}>
                             {user.name}
                         </ListItem>
                     ))}

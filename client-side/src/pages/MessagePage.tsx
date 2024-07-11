@@ -60,9 +60,9 @@ export const MessagePage: FC<MessagePageProps> = ({ loggedInAs }) => {
 
     const handleChange =
         (prop: keyof FormState) =>
-            (event: React.ChangeEvent<HTMLInputElement>) => {
-                setValues({ ...values, [prop]: event.target.value })
-            }
+        (event: React.ChangeEvent<HTMLInputElement>) => {
+            setValues({ ...values, [prop]: event.target.value })
+        }
 
     const handleSendMessage = () => {
         console.info(`Tried to send a new message!`, values.newMessage)

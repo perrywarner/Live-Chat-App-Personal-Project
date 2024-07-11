@@ -1,5 +1,10 @@
 import { randomInt } from 'crypto'
-import { Message, MessageCreateRequest, MessageGetQueryParams, setupMessageModel } from '../models'
+import {
+    Message,
+    MessageCreateRequest,
+    MessageGetQueryParams,
+    setupMessageModel,
+} from '../models'
 import { messageData } from '../test/mockData'
 import { Model, ModelCtor, Sequelize } from 'sequelize'
 
@@ -11,12 +16,14 @@ export class MessageService {
         this.messages = new Map(keyedMessageData)
         // Set up our Sequelize Models which are basically our DB Tables. More info at https://sequelize.org/docs/v6/core-concepts/model-basics/#concept
         console.log('\n✨ Creating the Message Table ✨')
-        setupMessageModel(dbConnection).then((table) => {
-            this.messagesTable = table;
-            console.log('✅ Successfully created the Message Table')
-        }).catch((error) => {
-            throw new Error('Failed to create the Message table:', error)
-        })
+        setupMessageModel(dbConnection)
+            .then((table) => {
+                this.messagesTable = table
+                console.log('✅ Successfully created the Message Table')
+            })
+            .catch((error) => {
+                throw new Error('Failed to create the Message table:', error)
+            })
     }
 
     create(submitted: MessageCreateRequest) {
@@ -35,7 +42,7 @@ export class MessageService {
 
     // potential TODO: maybe add queryBy Message['data']
     queryBy({ sentBy }: MessageGetQueryParams) {
-        let response: Message[] = [];
+        let response: Message[] = []
 
         if (sentBy) {
             response = Array.from(this.messages.values()).filter((message) => {
@@ -43,7 +50,7 @@ export class MessageService {
             })
         }
 
-        return response;
+        return response
     }
 
     /* WIP

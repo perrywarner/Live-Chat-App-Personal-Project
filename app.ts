@@ -4,53 +4,56 @@ import path from 'path'
 import cookieParser from 'cookie-parser'
 import logger from 'morgan'
 import cors from 'cors'
-import { Model, ModelCtor, Sequelize } from 'sequelize';
-import { config } from 'dotenv';
+import { Model, ModelCtor, Sequelize } from 'sequelize'
+import { config } from 'dotenv'
 
 // Load .env file contents into process.env
-config();
+config()
 
 // creates instances of Express framework & Express's URL Router that will be referenced across the backend (singletons)
 export const app = express()
 export const router = Router()
 
 // Connect to PostgreSQL via the Sequelize ORM
-export let dbConnection: Sequelize | undefined = undefined;
+export let dbConnection: Sequelize | undefined = undefined
 
-const RDS_DB_NAME = process.env.RDS_DB_NAME;
-const RDS_USERNAME = process.env.RDS_USERNAME;
-const RDS_PASSWORD = process.env.RDS_PASSWORD;
-const RDS_URL = process.env.RDS_URL;
+const RDS_DB_NAME = process.env.RDS_DB_NAME
+const RDS_USERNAME = process.env.RDS_USERNAME
+const RDS_PASSWORD = process.env.RDS_PASSWORD
+const RDS_URL = process.env.RDS_URL
 
 import { setupMessageModel, setupUserModel } from './models/index'
 if (!RDS_URL || !RDS_DB_NAME || !RDS_PASSWORD || !RDS_USERNAME) {
     console.log('imported the following env vars:', config().parsed)
-    throw new Error('Missing required environment variable: RDS_DATABASE_URL');
+    throw new Error('Missing required environment variable: RDS_DATABASE_URL')
 } else {
     // Set up the DB connection
     dbConnection = new Sequelize(RDS_DB_NAME, RDS_USERNAME, RDS_PASSWORD, {
-      host: RDS_URL,
-      dialect: 'postgres',
-      port: 5432,
-      dialectOptions: {
-        ssl: {
-          require: false, // TODO turn SSL back on!!!!! (also requires tweaking RDS -> parameter groups -> parameters -> rds.force_ssl -> 1 [instead of current 0] -> reboot)
-          rejectUnauthorized: false // adjust based on your SSL settings
-        }
-      },
-      // TODO in future: if I'm finding the "console log every query" too spammy or something, tune this to something else via https://sequelize.org/docs/v6/getting-started/#logging
-      logging: console.log, // This is the default behavior, just making it explicit for visibility.
-    });
-    
+        host: RDS_URL,
+        dialect: 'postgres',
+        port: 5432,
+        dialectOptions: {
+            ssl: {
+                require: false, // TODO turn SSL back on!!!!! (also requires tweaking RDS -> parameter groups -> parameters -> rds.force_ssl -> 1 [instead of current 0] -> reboot)
+                rejectUnauthorized: false, // adjust based on your SSL settings
+            },
+        },
+        // TODO in future: if I'm finding the "console log every query" too spammy or something, tune this to something else via https://sequelize.org/docs/v6/getting-started/#logging
+        logging: console.log, // This is the default behavior, just making it explicit for visibility.
+    })
+
     // Check that it works
-    console.log('\n✨ Attempting to connect to the Postgres DB via our Sequelize ORM ✨')
-    dbConnection.authenticate()
-      .then(() => {
-        console.log('Connection has been established successfully.');
-      })
-      .catch(err => {
-        console.error('Unable to connect to the database:', err);
-      });
+    console.log(
+        '\n✨ Attempting to connect to the Postgres DB via our Sequelize ORM ✨'
+    )
+    dbConnection
+        .authenticate()
+        .then(() => {
+            console.log('Connection has been established successfully.')
+        })
+        .catch((err) => {
+            console.error('Unable to connect to the database:', err)
+        })
 }
 
 // create and share singletons of our app's internal services
