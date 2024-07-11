@@ -37,6 +37,7 @@ let server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
+console.log(`Starting Express server. Listening on port: ${port}`)
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
