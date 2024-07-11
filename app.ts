@@ -96,6 +96,11 @@ app.use(function (req, res, next) {
     next(createError(404))
 })
 
+const port = 3001
+app.listen(port, '0.0.0.0', () => {
+  console.log(`Server running on port ${port}`);
+})
+
 // error handler
 // app.use(function (err, req, res) {
 //     /** !!!!!!! NOTE TO SELF: uncomment whole function and debug compile errors !!!!!!!
