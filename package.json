@@ -8,12 +8,12 @@
         "start": "ts-node ./bin/www.ts --input-type=module",
         "start:dev": "ts-node-dev  ./bin/www.ts --input-type=module",
         "start-ui": "cd client-side && yarn start",
-        "test": "jest",
-        "test:users": "curl http://localhost:3001/users",
+        "unit-test": "jest",
+        "api-test": "curl http://localhost:3001/users",
         "compile": "tsc",
         "format": "yarn prettier --write .",
-        "format-check": "yarn prettier --check .",
-        "connect-to-ec2": "bash ./scripts/ssh_to_ec2.sh"
+        "connect-to-ec2": "bash ./scripts/ssh_to_ec2.sh",
+        "connect-to-rds-from-ec2": "psql --host=database-1.ctaqyuikqvey.us-east-2.rds.amazonaws.com --port=5432 --username=postgres --dbname=postgres"
     },
     "engines": {
         "node": ">=16.14.0"

@@ -1,17 +1,3 @@
-# PLEASE READ
-
-**THESE NOTES ARE ARCHIVED** since I didn't set up Postgres from scratch. I had spent a few days trying to get Postgres to work but then came across [this video from Theo](https://www.youtube.com/watch?v=cC6HFd1zcbo&t=2282s) that had a lot of insight as illustrated in this diagram:
-
-![alt text](railway-use-case.png 'Railway Usecase')
-
-Theo sold Railway as the most pragmatic choice for me since I found myself days into Postgres setup & config with no end in sight, and Postgres was only supposed to be "working" and then Prisma would do the heavy lifting from that point. Railway seemed to be [**INSANELY SIMPLE TO SET UP**](https://youtu.be/cC6HFd1zcbo?t=968) but still provided the full power of a Postgres DB - this seemed perfect for my use case. I tried what Theo did and it was seriously that simple! I haven't turned back since.
-
-Keep around the notes I was working on since I put hours into this and maybe it'll help me in the future.
-
----
-
----
-
 # Postgres: setup
 
 -   Postgres is the DB in use for this app.
@@ -75,16 +61,3 @@ Sources:
         2. Else: add the line `DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE"`. The stuff in caps are placeholders, you'll need to [check this doc](https://www.prisma.io/docs/concepts/database-connectors/postgresql#base-url-and-path) to figure out how to set them up.
 8. **Initialize Prisma**
     1. `yarn prisma migrate dev --name init`
-
-## Misc
-
-Where I left off 8/10
-
-where I'm at with this Prisma & Postgres stuff @ 2:30pm:
-
-1. try to get "yarn prisma migrate dev --name init" to work with my .env
-   -- **ALSO** added step #5 to doc since its mentioned in Step 3 of https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-18-04
-   -- determine: do I even need step #5? If it turns out to be redundant, need to remove this from doc
-
-2. once "yarn prisma ... init" command works, need to rework doc step #7.3.1 to mostly match .env
-3. after finish #7.3.1, then continue setup process & doc from step #8.1
