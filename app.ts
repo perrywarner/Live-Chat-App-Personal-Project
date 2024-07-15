@@ -16,17 +16,15 @@ export const router = Router()
 
 // Connect to PostgreSQL via the Sequelize ORM
 export let dbConnection: Sequelize | undefined = undefined
-
 const RDS_DB_NAME = process.env.RDS_DB_NAME
 const RDS_USERNAME = process.env.RDS_USERNAME
 const RDS_PASSWORD = process.env.RDS_PASSWORD
 const RDS_URL = process.env.RDS_URL
-
-import { setupMessageModel, setupUserModel } from './models/index'
 if (!RDS_URL || !RDS_DB_NAME || !RDS_PASSWORD || !RDS_USERNAME) {
     console.log('imported the following env vars:', config().parsed)
     throw new Error('Missing required environment variable: RDS_DATABASE_URL')
 } else {
+    console.log('imported the following env vars:', config().parsed)
     // Set up the DB connection
     dbConnection = new Sequelize(RDS_DB_NAME, RDS_USERNAME, RDS_PASSWORD, {
         host: RDS_URL,

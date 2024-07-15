@@ -1,5 +1,6 @@
 dist
 .env
+scripts/generate_rds_auth_token.sh
 
 # dependencies
 node_modules
