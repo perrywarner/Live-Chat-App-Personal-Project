@@ -38,7 +38,7 @@ export const setupMessageModel = async (dbConnection: Sequelize) => {
 
     // Create the table if it doesn't already exist. (Not destructive)
     // If it does exist, it is first dropped. (Destructive) [caused by { force: true }]
-    await tableDefinition.sync({ force: true })
+    await tableDefinition.sync()
     // if I wanted to drop it, it'd be like so
     // definition.drop();
     // TODO in future: since table creation or dropping can be destructive, consider https://sequelize.org/docs/v6/other-topics/migrations/ as a better alternative

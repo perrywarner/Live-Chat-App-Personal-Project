@@ -26,7 +26,7 @@ export const setupUserModel = async (dbConnection: Sequelize) => {
     })
 
     // Create the table if it doesn't already exist. If it does exist, it is first dropped since I'm using { force: true }.
-    await tableDefinition.sync({ force: true })
+    await tableDefinition.sync()
     // definition.drop(); // if I wanted to drop it, it'd be like so
     // TODO in future: since table creation or dropping can be destructive, consider https://sequelize.org/docs/v6/other-topics/migrations/ as a better alternative
 

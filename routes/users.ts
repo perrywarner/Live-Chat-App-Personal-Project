@@ -3,7 +3,6 @@ import { UserCreateRequest } from '../models'
 
 // TODO get by name
 export const usersRoute = router.get('/users', async function (req, res) {
-    console.log('called user get')
     res.json(await User.getList())
 })
 
@@ -12,7 +11,6 @@ export const createUser = router.put('/users', async (req, res) => {
         const submittedUser: UserCreateRequest = { name: req.body.name }
 
         // build new User based upon the { name: string } from request body
-        console.log('called user put')
         const createResult = await User.create(submittedUser)
 
         if (createResult) {
