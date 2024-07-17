@@ -20,14 +20,13 @@ export class UserService {
     async getList() {
         if (!this.usersTable) {
             throw new Error(
-                'Tried to create a User but usersTable has not yet been initialized'
+                'Could not perform operation because usersTable has not yet been initialized'
             )
         }
         const userListQueryResult = await this.usersTable.findAll()
         const userList = userListQueryResult.map((queryResult) => {
             return queryResult.toJSON()
         })
-        console.log('User list query result: ', userList)
         return userList
     }
 
@@ -36,14 +35,13 @@ export class UserService {
         // Reference: https://sequelize.org/docs/v6/core-concepts/model-instances/#creating-an-instance
         if (!this.usersTable) {
             throw new Error(
-                'Tried to create a User but usersTable has not yet been initialized'
+                'Could not perform operation because usersTable has not yet been initialized'
             )
         }
         const newUserDbEntry = await this.usersTable.create({
             name: submitted.name,
         })
         const newUser = newUserDbEntry.toJSON()
-        console.log('Created new User: ', newUser)
         return newUser
     }
 }
