@@ -213,7 +213,7 @@ export class MessageService {
 
     async startSyncTimer() {
         console.log('Starting sync timer. Should execute in 2 minutes')
-        setInterval(this.startSyncTimer, 120000)
+        setInterval(() => this.startSyncTimer(), 120000)
         console.log('Ending sync timer.')
         await this.syncMessagesInMemoryWithDb()
     }
