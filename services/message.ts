@@ -124,6 +124,7 @@ export class MessageService {
                 return {
                     data: newMessage.data,
                     sentBy: newMessage.sentBy,
+                    createTime: newMessage.createTime,
                 }
             })
             const totalCreatedsCount = await this.messagesTable.bulkCreate(
@@ -212,8 +213,8 @@ export class MessageService {
     }
 
     async startSyncTimer() {
-        console.log('Starting sync timer. Should execute in 2 minutes')
-        setInterval(() => this.startSyncTimer(), 120000)
+        console.log('Starting sync timer. Should execute in 1 minutes')
+        setInterval(() => this.startSyncTimer(), 60000)
         console.log('Ending sync timer.')
         await this.syncMessagesInMemoryWithDb()
     }
