@@ -114,6 +114,8 @@ export class MessageService {
         if (!this.cacheSyncBacklog || !this.messagesTable) {
             return
         }
+        console.log('Ending sync timer.')
+
         console.log('🔄 Starting sync with DB 🔄')
 
         const { news, updateds, deleteds } = this.cacheSyncBacklog
@@ -212,6 +214,12 @@ export class MessageService {
             this.cacheSyncBacklog = cacheBacklogDefault
         }
         console.log('🔄 Finishing sync with DB 🔄')
+
+        this.syncTimerTimesCalled = this.syncTimerTimesCalled + 1
+        console.log(
+            `DB sync wait timer started. Should execute in 10 seconds. Times it has been called: ${this.syncTimerTimesCalled}.`
+        )
+        displayCurrentTime()
     }
 
     // TODO figure out why the fuck this is getting called twice - or more!!!
@@ -220,13 +228,7 @@ export class MessageService {
     // 2. add a message (via Postman or w/e)
     // 3. wait for Sync to get called/executed. Should be called more than one time...
     async startSyncTimer() {
-        this.syncTimerTimesCalled = this.syncTimerTimesCalled + 1
-        console.log(
-            `Starting sync timer. Should execute in 10 seconds. Times it has been called: ${this.syncTimerTimesCalled}.`
-        )
-        displayCurrentTime()
         setInterval(() => this.syncMessagesInMemoryWithDb(), 10000)
-        console.log('Ending sync timer.')
         await this.syncMessagesInMemoryWithDb()
     }
 }
