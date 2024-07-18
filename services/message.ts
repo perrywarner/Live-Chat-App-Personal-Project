@@ -27,10 +27,12 @@ export class MessageService {
     messages: Message[]
     messagesTable: ModelCtor<Model<any, any>> | undefined
     cacheSyncBacklog: CacheSyncBacklog
+    syncTimerTimesCalled: number
 
     constructor(dbConnection: Sequelize) {
         this.cacheSyncBacklog = cacheBacklogDefault
         this.messages = []
+        this.syncTimerTimesCalled = 0
 
         // Set up our Sequelize Models which are basically our DB Tables. More info at https://sequelize.org/docs/v6/core-concepts/model-basics/#concept
         console.log('\n✨ Initiating Message Table setup ✨')
@@ -212,8 +214,14 @@ export class MessageService {
         console.log('🔄 Finishing sync with DB 🔄')
     }
 
+    // TODO figure out why the fuck this is getting called twice - or more!!!
+    // how to figure out it's getting called twice?
+    // 1. start the app
+    // 2. add a message (via Postman or w/e)
+    // 3. wait for Sync to get called/executed. Should be called more than one time...
     async startSyncTimer() {
-        console.log('Starting sync timer. Should execute in 1 minutes')
+        this.syncTimerTimesCalled = this.syncTimerTimesCalled + 1
+        console.log(`Starting sync timer. Should execute in 1 minutes. Times it has been called: ${this.syncTimerTimesCalled}`)
         setInterval(() => this.startSyncTimer(), 60000)
         console.log('Ending sync timer.')
         await this.syncMessagesInMemoryWithDb()
