@@ -225,7 +225,7 @@ export class MessageService {
             `Starting sync timer. Should execute in 10 seconds. Times it has been called: ${this.syncTimerTimesCalled}.`
         )
         displayCurrentTime()
-        setInterval(() => this.startSyncTimer(), 10000)
+        setInterval(() => this.syncMessagesInMemoryWithDb(), 10000)
         console.log('Ending sync timer.')
         await this.syncMessagesInMemoryWithDb()
     }
