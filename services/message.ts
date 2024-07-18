@@ -5,8 +5,8 @@ import {
     MessageGetQueryParams,
     setupMessageModel,
 } from '../models'
-import { messageData } from '../test/mockData'
 import { Model, ModelCtor, Sequelize } from 'sequelize'
+import { displayCurrentTime } from '../utils/displayCurrentTime'
 
 type CacheSyncBacklog = {
     news: Message[]
@@ -221,8 +221,11 @@ export class MessageService {
     // 3. wait for Sync to get called/executed. Should be called more than one time...
     async startSyncTimer() {
         this.syncTimerTimesCalled = this.syncTimerTimesCalled + 1
-        console.log(`Starting sync timer. Should execute in 1 minutes. Times it has been called: ${this.syncTimerTimesCalled}`)
-        setInterval(() => this.startSyncTimer(), 60000)
+        console.log(
+            `Starting sync timer. Should execute in 10 seconds. Times it has been called: ${this.syncTimerTimesCalled}.`
+        )
+        displayCurrentTime()
+        setInterval(() => this.startSyncTimer(), 10000)
         console.log('Ending sync timer.')
         await this.syncMessagesInMemoryWithDb()
     }
