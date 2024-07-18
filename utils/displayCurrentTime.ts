@@ -12,6 +12,7 @@ export const displayCurrentTime = () => {
         minute: 'numeric',
         second: 'numeric',
         hour12: true,
+        timeZone: 'America/New_York',
     }).format(now)
 
     // Display the formatted date and time
