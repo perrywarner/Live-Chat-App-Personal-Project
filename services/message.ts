@@ -114,12 +114,9 @@ export class MessageService {
         if (!this.cacheSyncBacklog || !this.messagesTable) {
             return
         }
-        console.log('Ending sync timer.')
-
         console.log('🔄 Starting sync with DB 🔄')
 
         const { news, updateds, deleteds } = this.cacheSyncBacklog
-        let crudActionsPerformed = false
         if (news.length) {
             console.log(
                 `${news.length} Messages have been created in the in-memory cache. Attempting to create them in the DB...`
@@ -135,7 +132,6 @@ export class MessageService {
                 revisedAsDbCompatible
             )
             console.log(`📀 Created ${totalCreatedsCount} Messages in the DB.`)
-            crudActionsPerformed = true
         }
         if (updateds.length) {
             console.log(
@@ -168,7 +164,6 @@ export class MessageService {
                 0
             )
             console.log(`📀 Updated ${totalUpdatedsCount} Messages in the DB.`)
-            crudActionsPerformed = true
         }
         if (deleteds.length) {
             console.log(
@@ -198,26 +193,23 @@ export class MessageService {
                 0
             )
             console.log(`📀 Deleted ${totalDeletedsCount} Messages in the DB.`)
-            crudActionsPerformed = true
         }
-        if (crudActionsPerformed) {
-            const messageListQueryResult = await this.messagesTable.findAll()
-            const messageList = messageListQueryResult.map((queryResult) => {
-                return queryResult.toJSON()
-            })
-            this.messages = messageList
-            if (this.messages) {
-                console.log(
-                    '✅ Messages successfully queried from DB and loaded in memory'
-                )
-            }
-            this.cacheSyncBacklog = cacheBacklogDefault
+        const messageListQueryResult = await this.messagesTable.findAll()
+        const messageList = messageListQueryResult.map((queryResult) => {
+            return queryResult.toJSON()
+        })
+        this.messages = messageList
+        if (this.messages) {
+            console.log(
+                '✅ Messages successfully queried from DB and loaded in memory'
+            )
         }
+        this.cacheSyncBacklog = cacheBacklogDefault
         console.log('🔄 Finishing sync with DB 🔄')
 
         this.syncTimerTimesCalled = this.syncTimerTimesCalled + 1
         console.log(
-            `DB sync wait timer started. Should execute in 10 seconds. Times it has been called: ${this.syncTimerTimesCalled}.`
+            `DB sync wait timer started. Should execute in 20 seconds. Times it has been called: ${this.syncTimerTimesCalled}.`
         )
         displayCurrentTime()
     }
