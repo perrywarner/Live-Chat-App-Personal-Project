@@ -205,7 +205,11 @@ export class MessageService {
                 '✅ Messages successfully queried from DB and loaded in memory'
             )
         }
-        this.cacheSyncBacklog = cacheBacklogDefault
+        this.cacheSyncBacklog = {
+            news: [],
+            updateds: [],
+            deleteds: [],
+        }
         console.log('🔄 Finishing sync with DB 🔄')
 
         this.syncTimerTimesCalled = this.syncTimerTimesCalled + 1
