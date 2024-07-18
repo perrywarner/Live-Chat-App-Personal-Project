@@ -114,7 +114,8 @@ export class MessageService {
         if (!this.cacheSyncBacklog || !this.messagesTable) {
             return
         }
-        console.log('🔄 Starting sync with DB 🔄')
+        console.log('\n\n🔄 Starting sync with DB 🔄')
+        console.log('Cache Sync Backlog looks to be:', this.cacheSyncBacklog)
 
         const { news, updateds, deleteds } = this.cacheSyncBacklog
         if (news.length > 0) {
