@@ -117,7 +117,7 @@ export class MessageService {
         console.log('🔄 Starting sync with DB 🔄')
 
         const { news, updateds, deleteds } = this.cacheSyncBacklog
-        if (news.length) {
+        if (news.length > 0) {
             console.log(
                 `${news.length} Messages have been created in the in-memory cache. Attempting to create them in the DB...`
             )
@@ -133,7 +133,7 @@ export class MessageService {
             )
             console.log(`📀 Created ${totalCreatedsCount} Messages in the DB.`)
         }
-        if (updateds.length) {
+        if (updateds.length > 0) {
             console.log(
                 `${news.length} Messages have been updated in the in-memory cache. Attempting to update them in the DB...`
             )
@@ -165,7 +165,7 @@ export class MessageService {
             )
             console.log(`📀 Updated ${totalUpdatedsCount} Messages in the DB.`)
         }
-        if (deleteds.length) {
+        if (deleteds.length > 0) {
             console.log(
                 `${news.length} Messages have been deleted in the in-memory cache. Attempting to delete them in the DB...`
             )
