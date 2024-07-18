@@ -17,12 +17,6 @@ type CacheSyncBacklog = {
     deleteds: Message[]
 }
 
-const cacheBacklogDefault: CacheSyncBacklog = {
-    news: [],
-    updateds: [],
-    deleteds: [],
-}
-
 export class MessageService {
     messages: Message[]
     messagesTable: ModelCtor<Model<any, any>> | undefined
@@ -30,7 +24,11 @@ export class MessageService {
     syncTimerTimesCalled: number
 
     constructor(dbConnection: Sequelize) {
-        this.cacheSyncBacklog = cacheBacklogDefault
+        this.cacheSyncBacklog = {
+            news: [],
+            updateds: [],
+            deleteds: [],
+        }
         this.messages = []
         this.syncTimerTimesCalled = 0
 
@@ -118,6 +116,7 @@ export class MessageService {
         console.log('Cache Sync Backlog looks to be:', this.cacheSyncBacklog)
 
         const { news, updateds, deleteds } = this.cacheSyncBacklog
+        let tableUpdated = false
         if (news.length > 0) {
             console.log(
                 `${news.length} Messages have been created in the in-memory cache. Attempting to create them in the DB...`
@@ -133,6 +132,7 @@ export class MessageService {
                 revisedAsDbCompatible
             )
             console.log(`📀 Created ${totalCreatedsCount} Messages in the DB.`)
+            tableUpdated = true
         }
         if (updateds.length > 0) {
             console.log(
@@ -165,6 +165,7 @@ export class MessageService {
                 0
             )
             console.log(`📀 Updated ${totalUpdatedsCount} Messages in the DB.`)
+            tableUpdated = true
         }
         if (deleteds.length > 0) {
             console.log(
@@ -194,16 +195,22 @@ export class MessageService {
                 0
             )
             console.log(`📀 Deleted ${totalDeletedsCount} Messages in the DB.`)
+            tableUpdated = true
         }
-        const messageListQueryResult = await this.messagesTable.findAll()
-        const messageList = messageListQueryResult.map((queryResult) => {
-            return queryResult.toJSON()
-        })
-        this.messages = messageList
-        if (this.messages) {
+        if (tableUpdated) {
             console.log(
-                '✅ Messages successfully queried from DB and loaded in memory'
+                'DB Table has been updated. Syncing in-memory cache with DB.'
             )
+            const messageListQueryResult = await this.messagesTable.findAll()
+            const messageList = messageListQueryResult.map((queryResult) => {
+                return queryResult.toJSON()
+            })
+            this.messages = messageList
+            if (this.messages) {
+                console.log(
+                    '✅ Messages successfully queried from DB and loaded in memory'
+                )
+            }
         }
         this.cacheSyncBacklog = {
             news: [],
@@ -219,11 +226,6 @@ export class MessageService {
         displayCurrentTime()
     }
 
-    // TODO figure out why the fuck this is getting called twice - or more!!!
-    // how to figure out it's getting called twice?
-    // 1. start the app
-    // 2. add a message (via Postman or w/e)
-    // 3. wait for Sync to get called/executed. Should be called more than one time...
     async startSyncTimer() {
         setInterval(() => this.syncMessagesInMemoryWithDb(), 10000)
         await this.syncMessagesInMemoryWithDb()
