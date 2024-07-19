@@ -20,7 +20,7 @@ export const apiSlice = createApi({
             query: (username) => ({
                 url: messageUrl,
                 method: 'GET',
-                params: { author: username },
+                params: { sentBy: username },
             }),
         }),
     }),

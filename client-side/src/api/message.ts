@@ -2,9 +2,9 @@ import { User, Message, MessageCreateRequest } from '../../../models'
 import { messageUrl } from './constants'
 
 export const getMessages = (
-    author?: User['name']
+    sentBy?: User['name']
 ): Promise<Message | Message[]> => {
-    const queryParams = author ? `?author=${author}` : ``
+    const queryParams = sentBy ? `?sentBy=${sentBy}` : ``
     const init: RequestInit = {
         /* "mode: 'no-cors'" handles error:
         Access to fetch at 'http://localhost:3001/messages' from origin 'http://localhost:3000' has been blocked by CORS policy: 

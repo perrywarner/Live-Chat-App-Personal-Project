@@ -25,7 +25,7 @@ export const MessageListItem: FC<MessageListItemProps> = ({
             <ListItemButton selected={selected} onClick={onClick}>
                 <ListItemText
                     primary={message.data}
-                    secondary={message.author}
+                    secondary={message.sentBy}
                 />
             </ListItemButton>
         </ListItem>

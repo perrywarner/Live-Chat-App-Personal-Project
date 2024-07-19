@@ -11,7 +11,7 @@ describe('Message Service', () => {
     it('should be able to create Message', () => {
         const mockSubmission: MessageCreateRequest = {
             data: 'Mock Submitted Message',
-            author: 'coolguy32',
+            sentBy: 'coolguy32',
         }
         instance.create(mockSubmission)
         const created = instance.queryBy('coolguy32')

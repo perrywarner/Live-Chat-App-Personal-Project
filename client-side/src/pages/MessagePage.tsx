@@ -1,7 +1,6 @@
 // third party
 import React, { FC, useState } from 'react'
 import { Box, Typography } from '@mui/material'
-import List from '@mui/material/List'
 import Paper from '@mui/material/Paper'
 import Grid from '@mui/material/Grid'
 import IconButton from '@mui/material/IconButton'
@@ -10,14 +9,11 @@ import InputLabel from '@mui/material/InputLabel'
 import InputAdornment from '@mui/material/InputAdornment'
 import FormControl from '@mui/material/FormControl'
 import SendIcon from '@mui/icons-material/Send'
-import Skeleton from '@mui/material/Skeleton'
 
 // intra-app
 import { Message, User } from '../../../models'
 import { MessageMainItem } from '../components/MessageMainItem/MessageMainItem' // note: not picking up the index.ts in that directory for some reason
 import { MessageList } from '../components/MessageList'
-import { MessageListItem } from '../components/MessageListItem'
-import { useGetMessageQuery, useGetMessagesQuery } from '../api/apiSlice'
 
 // local
 import './MessagePage.css'
@@ -25,17 +21,35 @@ import './MessagePage.css'
 const fakeMessages: Message[] = [
     {
         data: 'Have a great working week!',
-        author: 'Putri Tanjak',
+        sentBy: 'Putri Tanjak',
         createTime: 0,
+        createdAt: '172938',
+        updatedAt: "728319",
+        id: 217839
     },
     {
         data: 'This new landing page, What do you think?',
-        author: 'Ahmed Medi',
+        sentBy: 'Ahmed Medi',
         createTime: 1,
+        createdAt: '172938',
+        updatedAt: "728319",
+        id: 217839
     },
-    { data: '(img)', author: 'Ahmed Medi', createTime: 2 },
-    { data: '(Audio)', author: 'Milie Nose', createTime: 3 },
-    { data: 'Ok maszeehh!', author: 'MyFirstUser', createTime: 4 },
+    {
+        data: '(img)', sentBy: 'Ahmed Medi', createTime: 2, createdAt: '172938',
+        updatedAt: "728319",
+        id: 217839
+    },
+    {
+        data: '(Audio)', sentBy: 'Milie Nose', createTime: 3, createdAt: '172938',
+        updatedAt: "728319",
+        id: 217839
+    },
+    {
+        data: 'Ok maszeehh!', sentBy: 'MyFirstUser', createTime: 4, createdAt: '172938',
+        updatedAt: "728319",
+        id: 217839
+    },
 ]
 
 interface MessagePageProps {
@@ -45,8 +59,8 @@ interface MessagePageProps {
 export const MessagePage: FC<MessagePageProps> = ({ loggedInAs }) => {
     // const test = useGetMessageQuery('coolguy32')
 
-    // TODO swap this state from index of selected to Message.author, and then use that author (when changed) to GET messages author={user}.
-    // reasoning: I want to switch GET Messages to instead be something like GET Threads where threads are tied to author.
+    // TODO swap this state from index of selected to Message.sentBy, and then use that sentBy (when changed) to GET messages sentBy={user}.
+    // reasoning: I want to switch GET Messages to instead be something like GET Threads where threads are tied to sentBy.
     // reasoning(cont): when this happens, the "message details" pane won't work right unless its messages list is a derived query from state change on the selected thread
     const [selectedListIndex, setSelectedListIndex] = useState<number>()
 
@@ -60,9 +74,9 @@ export const MessagePage: FC<MessagePageProps> = ({ loggedInAs }) => {
 
     const handleChange =
         (prop: keyof FormState) =>
-        (event: React.ChangeEvent<HTMLInputElement>) => {
-            setValues({ ...values, [prop]: event.target.value })
-        }
+            (event: React.ChangeEvent<HTMLInputElement>) => {
+                setValues({ ...values, [prop]: event.target.value })
+            }
 
     const handleSendMessage = () => {
         console.info(`Tried to send a new message!`, values.newMessage)

@@ -15,7 +15,7 @@ export const MessageMainItem: FC<MessageMainItemProps> = ({
     message,
     loggedInAs,
 }) => {
-    const authorSelf = message.author === loggedInAs.name
+    const authorSelf = message.sentBy === loggedInAs.name
 
     return (
         <Grid
@@ -26,7 +26,7 @@ export const MessageMainItem: FC<MessageMainItemProps> = ({
             <Typography variant="subtitle1">
                 {authorSelf
                     ? `You (logged in as ${loggedInAs.name})`
-                    : message.author}
+                    : message.sentBy}
             </Typography>
             <Typography variant="body1">{message.data}</Typography>
         </Grid>
