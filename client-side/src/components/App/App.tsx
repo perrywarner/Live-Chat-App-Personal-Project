@@ -5,9 +5,9 @@ import { Provider } from 'react-redux'
 
 // intra app
 import { User } from '../../../../models'
-import { MessagePage } from '../../pages/MessagePage'
+import { MessagePage } from '../../pages/Message/MessagePage'
 import { store } from '../../state/store'
-import { Login } from '../Login'
+import { Login } from '../../pages/Login'
 import { AppBar } from '../AppBar'
 
 // intra app - redux example (TODO get rid of this)

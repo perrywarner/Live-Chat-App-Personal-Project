@@ -2,9 +2,9 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 // intra-app
-import { Message, User } from '../../../models'
-import { RootState, AppThunk } from '../state/store'
-import { getMessages } from '../api/message'
+import { Message, User } from '../../../../models'
+import { RootState, AppThunk } from '../../state/store'
+import { getMessages } from '../../api/message'
 
 type RequestStatus = 'idle' | 'loading' | 'failed'
 

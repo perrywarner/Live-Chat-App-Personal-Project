@@ -8,7 +8,7 @@ import React, {
 
 import { User } from '../../../../models'
 import { useUser } from '../../hooks/user'
-import { IconSubmit } from '../IconSubmit'
+import { IconSubmit } from '../../components/IconSubmit'
 import { List, ListItem, TextField, Typography } from '@mui/material'
 
 interface LoginProps {

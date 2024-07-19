@@ -1,5 +1,5 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
-import messageReducer from '../pages/messageSlice'
+import messageReducer from '../pages/Message/messageSlice'
 import { apiSlice } from '../api/apiSlice'
 
 export const store = configureStore({

@@ -11,9 +11,9 @@ import FormControl from '@mui/material/FormControl'
 import SendIcon from '@mui/icons-material/Send'
 
 // intra-app
-import { Message, User } from '../../../models'
-import { MessageMainItem } from '../components/MessageMainItem/MessageMainItem' // note: not picking up the index.ts in that directory for some reason
-import { MessageList } from '../components/MessageList'
+import { Message, User } from '../../../../models'
+import { MessageMainItem } from '../../components/MessageMainItem/MessageMainItem' // note: not picking up the index.ts in that directory for some reason
+import { MessageList } from '../../components/MessageList'
 
 // local
 import './MessagePage.css'
