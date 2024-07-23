@@ -39,7 +39,7 @@ export const useUser = () => {
                 name: tryPutUser,
             }
 
-            fetch('/users', {
+            fetch(`${DOMAIN_ROOT}/users`, {
                 body: JSON.stringify(requestBody),
                 method: 'PUT',
                 headers: {
