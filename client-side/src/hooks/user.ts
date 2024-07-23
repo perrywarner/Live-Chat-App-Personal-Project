@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 
 // intra-app
 import { User, UserCreateRequest } from '../../../models'
+import { DOMAIN_ROOT } from '../constants'
 
 export const useUser = () => {
     const [users, setUsers] = useState<User[]>()
@@ -15,7 +16,7 @@ export const useUser = () => {
     useEffect(() => {
         setGetIsLoading(true)
 
-        fetch('/users')
+        fetch(`${DOMAIN_ROOT}/users`)
             .then((data) => {
                 data.json().then((users: User[]) => {
                     setUsers(users)
