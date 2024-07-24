@@ -59,7 +59,7 @@ export class MessageService {
     }
 
     create(submitted: MessageCreateRequest) {
-        // TODO don't create message if sentBy not in Users
+        // TODO don't create message if from not in Users
         if (!this.messagesTable) {
             throw new Error(
                 'Could not perform operation because messagesTable has not yet been initialized'
@@ -68,7 +68,8 @@ export class MessageService {
         const newMessage: Message = {
             id: randomInt(0, 65536),
             data: submitted.data,
-            sentBy: submitted.sentBy,
+            to: submitted.to,
+            from: submitted.from,
             createTime: Date.now(),
             createdAt: Date.now().toString(),
             updatedAt: Date.now().toString(),
@@ -80,12 +81,12 @@ export class MessageService {
     }
 
     // potential TODO: maybe add queryBy Message['data']
-    queryBy({ sentBy }: MessageGetQueryParams) {
+    queryBy({ from }: MessageGetQueryParams) {
         let response: Message[] = []
 
-        if (sentBy) {
+        if (from) {
             response = Array.from(this.messages.values()).filter((message) => {
-                return sentBy === message.sentBy
+                return from === message.from
             })
         }
 
@@ -124,7 +125,7 @@ export class MessageService {
             const revisedAsDbCompatible = news.map((newMessage) => {
                 return {
                     data: newMessage.data,
-                    sentBy: newMessage.sentBy,
+                    from: newMessage.from,
                     createTime: newMessage.createTime,
                 }
             })
@@ -142,7 +143,7 @@ export class MessageService {
             const revisedAsDbCompatible = updateds.map((updatedMessage) => {
                 return {
                     data: updatedMessage.updated.data,
-                    sentBy: updatedMessage.updated.sentBy,
+                    from: updatedMessage.updated.from,
                 }
             })
             const updateThreads = revisedAsDbCompatible.map(

@@ -10,5 +10,5 @@ import { Message } from '../models'
 //
 // (note valid as of 6/30/22)
 // export const addNewMessageToUserauthor = (newMessage: Message) => {
-//     User.addSentMessage(newMessage.sentBy, newMessage)
+//     User.addSentMessage(newMessage.from, newMessage)
 // }

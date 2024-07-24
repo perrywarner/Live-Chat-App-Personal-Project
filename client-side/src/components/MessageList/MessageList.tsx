@@ -22,7 +22,7 @@ export const MessageList: FC<MessageListProps> = ({
         isLoading,
         isSuccess,
         isError,
-    } = useGetMessagesQuery() // TODO rework GET Messages to be GET Threads and THEN use GET messages sentBy={user} to drill down
+    } = useGetMessagesQuery() // TODO rework GET Messages to be GET Threads and THEN use GET messages from={user} to drill down
 
     return (
         // TODO replace style "flex: 1" with a <Grid container> and <Grid item xs={4}> combo in the immediate parent of where this <MessageList> gets composed in <MessagePage>

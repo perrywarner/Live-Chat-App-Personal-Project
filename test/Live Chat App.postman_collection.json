@@ -29,7 +29,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:3001/messages?sentBy=coolguy32",
+					"raw": "localhost:3001/messages?from=coolguy32",
 					"host": [
 						"localhost"
 					],
@@ -39,7 +39,7 @@
 					],
 					"query": [
 						{
-							"key": "sentBy",
+							"key": "from",
 							"value": "coolguy32"
 						}
 					]
@@ -54,7 +54,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"data\": \"Mock Submitted Message\",\r\n    \"sentBy\": \"coolguy32\"\r\n}",
+					"raw": "{\r\n    \"data\": \"Mock Submitted Message\",\r\n    \"from\": \"coolguy32\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -126,7 +126,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"data\": \"sending first message from new User \\\"foo\\\"\",\r\n    \"sentBy\": \"foo\"\r\n}",
+					"raw": "{\r\n    \"data\": \"sending first message from new User \\\"foo\\\"\",\r\n    \"from\": \"foo\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

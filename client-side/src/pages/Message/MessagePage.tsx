@@ -21,7 +21,8 @@ import './MessagePage.css'
 const fakeMessages: Message[] = [
     {
         data: 'Have a great working week!',
-        sentBy: 'Putri Tanjak',
+        to: 'Ahmed Medi',
+        from: 'Putri Tanjak',
         createTime: 0,
         createdAt: '172938',
         updatedAt: "728319",
@@ -29,24 +30,25 @@ const fakeMessages: Message[] = [
     },
     {
         data: 'This new landing page, What do you think?',
-        sentBy: 'Ahmed Medi',
+        to: 'Putri Tanjak',
+        from: 'Ahmed Medi',
         createTime: 1,
         createdAt: '172938',
         updatedAt: "728319",
         id: 217839
     },
     {
-        data: '(img)', sentBy: 'Ahmed Medi', createTime: 2, createdAt: '172938',
+        data: '(img)', to: 'Ahmed Medi', from: 'Ahmed Medi', createTime: 2, createdAt: '172938',
         updatedAt: "728319",
         id: 217839
     },
     {
-        data: '(Audio)', sentBy: 'Milie Nose', createTime: 3, createdAt: '172938',
+        data: '(Audio)', to: 'Milie Nose', from: 'Milie Nose', createTime: 3, createdAt: '172938',
         updatedAt: "728319",
         id: 217839
     },
     {
-        data: 'Ok maszeehh!', sentBy: 'MyFirstUser', createTime: 4, createdAt: '172938',
+        data: 'Ok maszeehh!', to: 'MyFirstUser', from: 'MyFirstUser', createTime: 4, createdAt: '172938',
         updatedAt: "728319",
         id: 217839
     },
@@ -59,8 +61,8 @@ interface MessagePageProps {
 export const MessagePage: FC<MessagePageProps> = ({ loggedInAs }) => {
     // const test = useGetMessageQuery('coolguy32')
 
-    // TODO swap this state from index of selected to Message.sentBy, and then use that sentBy (when changed) to GET messages sentBy={user}.
-    // reasoning: I want to switch GET Messages to instead be something like GET Threads where threads are tied to sentBy.
+    // TODO swap this state from index of selected to Message.from, and then use that from (when changed) to GET messages from={user}.
+    // reasoning: I want to switch GET Messages to instead be something like GET Threads where threads are tied to from.
     // reasoning(cont): when this happens, the "message details" pane won't work right unless its messages list is a derived query from state change on the selected thread
     const [selectedListIndex, setSelectedListIndex] = useState<number>()
 

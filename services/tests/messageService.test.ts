@@ -11,10 +11,14 @@ describe('Message Service', () => {
     it('should be able to create Message', () => {
         const mockSubmission: MessageCreateRequest = {
             data: 'Mock Submitted Message',
-            sentBy: 'coolguy32',
+            from: 'coolguy32',
+            to: 'Testuser229',
         }
         instance.create(mockSubmission)
-        const created = instance.queryBy('coolguy32')
+        const created = instance.queryBy({
+            from: 'coolguy32',
+            to: 'Testuser229',
+        })
         expect(created).not.toBeUndefined()
     })
     it.todo(

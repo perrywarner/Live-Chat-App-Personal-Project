@@ -10,7 +10,7 @@ model User {
 model Message {
   id       Int    @id @default(autoincrement())
   data     String
-  sentBy   User   @relation(fields: [authorId], references: [id])
+  from   User   @relation(fields: [authorId], references: [id])
   authorId Int
 }
 

@@ -15,7 +15,7 @@ export const apiSlice = createApi({
             query: (username) => ({
                 url: messageUrl,
                 method: 'GET',
-                params: { sentBy: username },
+                params: { from: username },
             }),
         }),
     }),
