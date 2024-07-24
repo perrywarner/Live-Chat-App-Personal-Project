@@ -125,6 +125,7 @@ export class MessageService {
             const revisedAsDbCompatible = news.map((newMessage) => {
                 return {
                     data: newMessage.data,
+                    to: newMessage.to,
                     from: newMessage.from,
                     createTime: newMessage.createTime,
                 }
@@ -143,6 +144,7 @@ export class MessageService {
             const revisedAsDbCompatible = updateds.map((updatedMessage) => {
                 return {
                     data: updatedMessage.updated.data,
+                    to: updatedMessage.updated.to,
                     from: updatedMessage.updated.from,
                 }
             })
